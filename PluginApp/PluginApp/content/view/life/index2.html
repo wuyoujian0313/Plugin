@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<body id="body">
+<div data-role='page' id='lifeIndex'>
+	<link rel="stylesheet" href="../../css/life/index.css" />
+	<link rel="stylesheet" href="../../js/widgets/refresh/refresh.css" />
+	<script type="application/javascript" src="../../js/widgets/iscroll/iscroll.js"></script>
+	<script type="application/javascript" src="../../js/widgets/refresh/refresh.js"></script>
+	<header><a id='backTo' href='#' data-rel='back'></a>生活站</header>
+	<div id='wrapper'>
+		<ul id='tabTransfer'>
+			<li type='all' class='current'>全部<span id='curStyle'></span></li>
+			<li type='activity'>活动</li>
+			<li type='health'>健康</li>
+			<li type='column'>专栏</li>
+		</ul>
+		<div id='mainWrapper'>
+			<div id='scroller' style='float:left;'>
+				<div id="pullDown">
+					<span class="pullDownIcon"></span><span class="pullDownLabel">下拉刷新...</span>
+				</div>
+				<div id="viewList">
+				<!--tpl_articlelist-->
+				</div>
+				<div id="pullUp">
+					<span class="pullUpIcon"></span><span class="pullUpLabel">...</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script id="tpl_articlelist" type="text/x-handlebars-template">
+    {{#each articleList.data}}
+	<div class='articleItem' articleid='{{this.id}}'>
+		{{#if this.imgSrc }}
+		<div class="thumbnail"><img src='{{this.imgSrc}}' /></div>
+		{{/if}}
+		<div class="articleInfo{{#unless this.imgSrc}} nothumbnail{{/unless}}">
+			<h5>{{this.title}}</h5>
+			<p>{{this.summary}}</p>
+			<p><span>{{this.click}}</span><span>{{dateFormat this.pubDate 'YYYY-MM-DD HM' false}}</span></p>
+		</div>
+	</div>
+    {{/each}}
+    </script>
+	<script type='text/javascript' src='../../js/life/index.js'></script>
+</div>
+</body>
+</html>

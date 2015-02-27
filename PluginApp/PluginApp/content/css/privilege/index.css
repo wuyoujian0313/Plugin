@@ -1,0 +1,51 @@
+@charset "utf-8";
+/* CSS Document */
+.box{background:url(../../images/bg.png) repeat-y top center;background-size:100%;background-attachment:fixed;min-height:100%;height:auto;width:100%;position:absolute;display:inline-block;}
+#tabTransfer{background-color:rgba(255,255,255,0.8);}
+#privilegeIndex #mainBox{padding:0 0.5rem; position:relative;top:9rem;}
+#mainBox .show{display:block;}
+#conBox .privilegeContent{display:none;}
+#conBox .show{display:block;}
+#lookDetail{text-align:center;padding:3rem 0;}
+#lookDetail a{width:60%;height:3.5rem;line-height:3.5rem;color:#ffffff;text-align:center;display:inline-block;font-size:1.4rem;background:#e55151;text-decoration:none;text-shadow:none;}
+#privilegeContent{position:relative;top:8rem;background:#f9f9f9;}
+/*瀑布流*/
+#flowBox{padding-top:1rem;}
+#flowBox .defaultImg{border:0;padding:0;}
+#flowBox .defaultImg img{display:block;}
+#flowBox{width:96%;margin-left:2%;display:inline-block;}
+#flowBox li{list-style:none;padding:1px;border:1px solid #ececec;margin-bottom:1rem;background:#ffffff;}
+#flowBox ul{float:left;width:49%;margin-right:2%;}
+#flowBox h2,#flowBox .aboutInfo{padding:0 0.5rem;}
+#flowBox h2{font-size:1.4rem;font-weight:normal;word-break: break-all;word-wrap: break-word;padding-top:0.4rem;}
+#flowBox .aboutInfo span{width:50%;display:inline-block;line-height:2rem;font-size:1.2rem;color:#999999;}
+#flowBox .aboutInfo .tar{
+	text-align:right;
+	color:#999999;
+}
+#flowBox .aboutInfo b{background: url(/images/bottomicon04hui.png) no-repeat left center;
+	background-size: 1.4rem;display:inline-block;padding-left:1.6rem;font-weight:normal;}
+#flowBox ul li a{
+	position: relative;
+	display: block;
+	text-decoration: none;
+	color:#000000;
+}
+#flowBox ul li a img{
+	
+}
+#flowBox ul li a .flowState{
+	position: absolute;
+	left: 0;
+	top: 0.5rem;
+	display: inline-block;
+	width: 4.6rem;
+	color: #ffffff;
+	height: 1.5rem;
+	line-height: 1.5rem;
+	text-shadow:none;
+	text-align: center;
+}
+
+#privilegeIndex #pullDown,#privilegeIndex #pullUp,#brand #pullDown,#brand #pullUp{background:#f9f9f9;}
+#brand #flowBox h2 a{height:2.4rem;line-height:2.4rem;display:inline-block;}

@@ -1,0 +1,144 @@
+/*********** #reset **********/
+/* for webkit */
+textarea { resize: none }
+* {-webkit-tap-highlight-color: rgba(0,0,0,0)}
+
+body, div, dl, dt, dd,ol, ul, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, button, textarea, blockquote, p, ol { margin: 0; padding: 0 }
+ul, ol, dt, dd { list-style: none }
+
+
+h1, h2, h3, h4, h5, h6 { color:#000; }
+html{
+	font-size:62.5%; -webkit-text-size-adjust:none; height:100%; 
+}
+body{
+	color:#999; font-family:Arial,'黑体';  
+}
+pre{font-family:Arial,'黑体';}
+a, img{
+	-webkit-touch-callout: none;/* 禁止长按链接与图片弹出菜单 */
+}
+.clearfix:after{overflow:hidden;display:block;font-size:0;content:".";clear:both;height:0;}/*清浮动*/
+.fl{float:left;display:inline;}
+.fr{float:right;display:inline;}
+body#body{
+	background: #fff;
+}
+
+.ui-body-c, .ui-overlay-c{
+	background-image: none;
+}
+.ui-mobile .ui-page-active{
+	background:#fff;
+}
+.ui-mobile .ui-page-active.ui-dialog{
+	z-index:9999; padding-bottom:10rem;
+}
+
+/*弹出框样式*/
+.ui-corner-all, .ui-btn-corner-all{
+	-webkit-background-clip: inherit; background-clip: inherit; -webkit-border-radius:0; 
+	border-radius: 0;
+}
+.ui-body-c, .ui-overlay-c{
+	text-shadow:none;
+}
+.ui-btn-up-c{
+	background: #f9f9f9; border:1px solid #ececec; color:#000; text-shadow:none; font-weight:normal;
+}
+.ui-shadow {
+-moz-box-shadow: none;
+ -webkit-box-shadow: none; 
+ box-shadow: none; 
+}
+.ui-simpledialog-container{
+	border:none!important;
+}
+
+header{
+	position:absolute; top:0; left:0; width:100%; height:4.4rem; line-height:5rem; font-size:2rem; color:#000; 
+	text-align:center; background: #f5f5f5; z-index:100;overflow: hidden;
+}
+#wrapper{
+	position: fixed; top:4.4rem; background: #fff;width:100%;
+}
+#backTo{
+	position:absolute; width:8rem; height:5rem; overflow: hidden; left:0;
+	background:url(../images/backicon.png) no-repeat 1rem center;display:inline-block;background-size:auto 40%;
+}
+
+.createPost,.more,.ui-body-c .ui-link.createPost,.ui-body-c .ui-link.createPost:visited,.ui-body-c .ui-link.createPost:hover{
+	position:absolute; top:1.4rem; right:0.5rem; text-decoration: none; height:2rem; line-height:2.3rem; color:#47b0ed;padding-left:2rem; font-weight:normal;
+}
+.createPost{background: url(../images/createpost.png) no-repeat left top; background-size:auto 100%;font-size:1.8rem;}/*弹窗样式*/
+.ui-simpledialog-container.tips-dialog{
+	border:none !important; box-shadow: none; background:rgba(0,0,0,0.8); border-radius: 4px;
+	padding:15px 0; min-width: 10rem; text-shadow:none; font-size:2rem;
+}
+.ui-simpledialog-container.tips-dialog .ui-simpledialog-header h4{
+	color:#fff;font-size:1.6rem;font-weight:normal;
+}
+.ui-simpledialog-container.alert-dialog,.ui-simpledialog-container.confirm-dialog{
+	background:#fff; font-size: 2rem;height:140px;
+}
+.ui-simpledialog-container.alert-dialog .ui-icon-none,.ui-simpledialog-container.confirm-dialog .ui-icon-none{
+	display: none;
+}
+.ui-simpledialog-container.alert-dialog .ui-btn-inner,.ui-simpledialog-container.confirm-dialog .ui-btn-inner{
+	padding:0.8rem 20px;text-shadow:none;font-weight: normal;
+}
+.ui-simpledialog-container.alert-dialog .ui-simpledialog-controls,
+.ui-simpledialog-container.confirm-dialog .ui-simpledialog-controls{
+	text-align: center;
+}
+.ui-simpledialog-container.alert-dialog .ui-simpledialog-controls>a,
+.ui-simpledialog-container.confirm-dialog .ui-simpledialog-controls>a{
+	width:9.5rem; margin:1rem 5px; display: inline-block;background:#48b0ed;border:0;border-radius:0.3rem;color:#ffffff;
+}
+.ui-simpledialog-container.confirm-dialog .ui-simpledialog-controls .ui-btn-up-c,.ui-simpledialog-container.confirm-dialog .ui-simpledialog-controls .ui-btn-hover-c{background:#a0afd5;color:#ffffff;margin-left:15px;}
+.ui-simpledialog-container.alert-dialog .ui-simpledialog-header h4,
+.ui-simpledialog-container.confirm-dialog .ui-simpledialog-header h4{
+	padding:5px 5px 0;font-weight:normal;color:#666666;min-height:50px;line-height:28px;font-weight:normal;font-size:1.8rem;
+}
+/*加载*/
+#loadImg{width:16px;height:16px;position:fixed;margin-top:-8px;margin-left:-8px;left:50%;top:50%;}
+
+.abs{
+	position: absolute;
+}
+
+.ui-simpledialog-screen,.ui-popup-screen{
+	position:fixed;	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

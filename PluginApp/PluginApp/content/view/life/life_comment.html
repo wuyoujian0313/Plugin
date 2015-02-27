@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>度生活</title>
+<meta name="description" content=""/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="default"/>
+<meta name="viewport" content="width=device-width; height=device-height; initial-scale=1.0"/>
+<link rel="stylesheet" href="../../lib/jqm/css/themes/default/jquery.mobile-1.3.2.min.css" type="text/css"/>
+<link rel="stylesheet" href="../../css/common.css" type="text/css"/>
+<script type="text/javascript" src="../../lib/jqm/js/jquery.js"></script>
+<script>
+$(document).bind("mobileinit", function(){
+     $.mobile.selectmenu.prototype.options.nativeMenu = false;
+
+});
+</script>
+<script type="text/javascript" src="../../lib/jqm/js/jgestures.min.js"></script>
+<script type="text/javascript" src="../../lib/jqm/js/jquery.mobile-1.3.2.min.js"></script>
+<script type='text/javascript' src='../../lib/handlebars.js'></script>
+<script type='text/javascript' src='../../lib/registerHelper.js'></script>
+<script type='text/javascript' src='../../js/config.js'></script>
+<script type="text/javascript" src="../../js/common.js"></script>
+</head>
+<body>
+<div data-role="page" id="lifeComment">
+    <link rel="stylesheet" href="../../css/life/life_comment.css" />
+    <div id="wrap">
+        <header><a href="javascript:;" id='backTo'  data-rel='back'></a>生活站</header>
+        <div class="mainBox">
+        	<p class="addComment">添加一条评论</p>
+            <form action="" method="post" id='lifeCommentForm'>
+            	<textarea name="" id="textareaBox"></textarea>
+                <input type="button" id="formBtn" value="提&nbsp;交" />
+            </form>
+        </div>
+    </div>
+    <script type="text/javascript" src="../../js/life/life_comments.js"></script>
+    <script type="text/javascript">
+    if(window.is40){
+        
+        ;(function($){
+            //validSession('../../login.html');
+//window.updateTokenFn();
+
+            $('#formBtn').on('click',function(){
+                if($(this).hasClass('disable'))
+                {
+                    return;
+                }
+                var val = $.trim($('#textareaBox').val());
+                var str =$.mobile.activePage.attr('data-url');
+                var strData = $.duLife.fns.getUrlParam({str:str});
+                var articleId = strData.articleid || '';
+                var commentId = strData.commentid || '';
+                var author=strData.author || '';
+
+                var s = '';
+                for(var i = 0; i < val.length; i++){
+                    if(val[i].charCodeAt() != 8198){
+                        s += val[i];    
+                    }else{
+                        s += ' ';
+                    }
+                }
+                $(this).addClass('disable');
+                setTimeout(function(){
+                    val = s;
+                    if(val && val!='回复'+author+'：'){
+                        var json={
+                            'articleId':articleId,
+                            'commentId':commentId,
+                            'content':val
+                        };
+                        //alert(window.duLife.URLS.submitCommnets+'?content='+json.content)
+                        var url=window.duLife.URLS.submitCommnets;
+                        
+                        $.jsonp({
+                            type:'post',
+                            url: url,
+                            callbackParameter: 'callback',
+                            data: json,
+                            beforeSend: function(){
+                                // validSession('../../login.html',this);
+                            },
+                            success: function(data){
+                                if(data.success)
+                                {
+                                    $.duLife.fns.tips(data.message);
+                                    $('#lifeComment').undelegate('#backTo','click');
+                                    $('#lifeComment header a').removeAttr('href').attr('data-rel','back');
+                                    $('#textareaBox').val('');  
+                                    var str =$.mobile.activePage.attr('data-url');
+                                    var commentType =$.duLife.fns.getUrlParam({str:str}).commentType || '生活站';
+                                    var id = $.duLife.fns.getUrlParam().id;
+                                    setTimeout(function()
+                                    {
+                                        if(window.is40){
+                                            window.params = {'articleid':articleId,'id':id,'commentid':commentId,'comListType':commentType};
+                                            $.mobile.changePage('../../view/life/comment_list.html',{changeHash:false,transition :'none'});
+                                        }else{
+                                            $.mobile.changePage('../../view/life/comment_list.html?articleid='+articleId+'&commentid='+commentId+'&comListType='+commentType,{changeHash:false,transition :'none'});
+                                        }
+                                    },1000);
+                                }
+                                else
+                                {
+                                    $.duLife.fns.tips(data.message);
+                                };
+                                $('#formBtn').removeClass('disable');
+                            }
+                        })
+                    }else
+                    {
+                           $.duLife.fns.tips('评论内容不能为空，请输入评论内容。');
+                           $('#formBtn').removeClass('disable');
+                    };
+                },500)
+            });
+            $('#lifeComment').on('pagebeforeshow',function(){
+                var str =$.mobile.activePage.attr('data-url');
+                var strData = $.duLife.fns.getUrlParam({str:str});
+                var commentId = strData.commentid || '';
+                var commentType =strData.commentType || '生活站';
+                var author=strData.author || '';
+                var locatonHref=window.location.href;
+                if(str.indexOf('comment_list')!=-1 || locatonHref.indexOf('comment_list')!=-1)
+                {
+                    $.mobile.activePage.find('header').html('<a id="backTo" href="javascript:;" class="ui-link"></a>'+commentType);
+                    $('#lifeComment #backTo').removeAttr('data-rel');
+                    $('#lifeComment').delegate('#backTo','click',function(){
+                    $.mobile.changePage(locatonHref,{changeHash:false});
+                    });
+                }else{
+                    $.mobile.activePage.find('header').html('<a id="backTo" data-rel="back" href="javascript:;" class="ui-link"></a>'+commentType);
+                };
+                if(commentId)
+                {
+                    $('#textareaBox').val('回复'+author+'：');
+                };
+            });
+            $(window).on('orientationchange',function(){
+                setTimeout(function(){
+                    $('header').css('position','absolute')
+                },500)
+                
+            }).on('resize',function(){
+                setTimeout(function(){
+                    $('header').css('position','absolute')
+                },500)
+            })
+        })(jQuery);
+
+
+    }
+    </script>
+</div>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>6CE99EBA-79D4-4380-B46B-921EE029C577</string>
+	<key>IDESourceControlProjectName</key>
+	<string>PluginApp</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>3260905e-18b2-4292-b018-2fb6a64a9a86++4055</key>
+		<string>https://svn.baidu.com/erp/trunk/neiwang-dev/projects-webapps/mobile-oa/ios_demo</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Plugin/PluginApp/PluginApp.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>3260905e-18b2-4292-b018-2fb6a64a9a86++4055</key>
+		<string>../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectRepositoryRootDictionary</key>
+	<dict>
+		<key>3260905e-18b2-4292-b018-2fb6a64a9a86++4055</key>
+		<string>https://svn.baidu.com/erp</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://svn.baidu.com/erp/trunk/neiwang-dev/projects-webapps/mobile-oa/ios_demo/Plugin/PluginApp/PluginApp.xcodeproj</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>3260905e-18b2-4292-b018-2fb6a64a9a86++4055</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.subversion</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>3260905e-18b2-4292-b018-2fb6a64a9a86++4055</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ios_demo</string>
+		</dict>
+	</array>
+</dict>
+</plist>

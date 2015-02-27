@@ -1,0 +1,14 @@
+body{height:100%; overflow: hidden;}
+#wrapper{background:#ffffff;height:100%;}
+#demandList li{padding:0 0.8rem;}
+#demandList li div{display:-webkit-box;line-height: 24px;font-size: 1.6rem;padding: 1.3rem 0.3rem;border-bottom: 0.1rem dashed #D4D4D4;}
+#demandList li:nth-child(2n){background: #f9f9f9;}
+#demandList li span{display:block;-webkit-box-flex: 1;}
+#demandList li .conSpan{width:96%;height:24px;overflow:hidden;}
+#demandList li .lookCount{width:9.2rem;background: url(../../images/lookicon.png) no-repeat left center;background-size:1.6rem;padding-left:2rem;color:#cccccc;font-size:1.2rem;}
+/*问HR分类*/
+#askingGenre #demandList li{display:-webkit-box;}
+#askingGenre #demandList li div{-webkit-box-flex:1;display:block;}
+#askingGenre #demandList li .genreLeft{width:100%;position:relative;padding-left:3.5rem;box-sizing:border-box;}
+#askingGenre #demandList li .genreLeft img{width:3rem;height:3rem;position:absolute;left:0;top:10px;border-radius:3rem;}
+#askingGenre #demandList li .genreRight{text-align:right;width:5rem;font-size:3.6rem;color:#999;line-height:20px;}

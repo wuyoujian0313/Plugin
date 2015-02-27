@@ -1,0 +1,6 @@
+framework module UUAP {
+  umbrella header "UUAP.h"
+
+  export *
+  module * { export * }
+}

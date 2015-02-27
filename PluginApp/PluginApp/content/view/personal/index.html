@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>度生活</title>
+    <meta name="description" content=""/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="viewport" content="width=device-width, maximum-scale=1.0, user-scalable=0, initial-scale=1.0"/>
+    <meta content="telephone=no" name="format-detection">
+    <link rel="stylesheet" href="../../lib/jqm/css/themes/default/jquery.mobile-1.3.2.min.css" type="text/css"/>    
+    <link rel="stylesheet" href="../../js/widgets/simpledialog/jquery.mobile.simpledialog.css" />
+    <link rel="stylesheet" href="../../js/widgets/refresh/refresh.css" type="text/css"/>
+    <link rel="stylesheet" href="../../css/common.css" type="text/css"/>
+    <script type="text/javascript" src="../../lib/jqm/js/jquery.js"></script>
+    <script>
+    $(document).bind("mobileinit", function(){
+         $.mobile.selectmenu.prototype.options.nativeMenu = false;
+    });
+    </script>
+    <script type="text/javascript" src="../../lib/jqm/js/jquery.mobile-1.3.2.min.js"></script>
+    <script type='text/javascript' src='../../lib/handlebars.js'></script>
+    <script type='text/javascript' src='../../lib/registerHelper.js'></script>
+    <script type="application/javascript" src="../../js/widgets/device.js"></script>
+    <script type="application/javascript" src="../../js/widgets/simpledialog/jquery.mobile.simpledialog.js"></script>
+    <script type="application/javascript" src="../../js/widgets/iscroll/iscroll.js"></script>
+    <script type='text/javascript' src='../../js/widgets/refresh/refresh.js'></script>
+	<script type="application/javascript" src="../../js/widgets/jquery.jsonp.js"></script>
+    <script type='text/javascript' src='../../js/config.js'></script>
+    <script type='text/javascript' src='../../js/common.js'></script>
+</head>
+	<body id="body">
+		<div data-role = "page" id="personalCenter">
+			<link rel="stylesheet" href="../../css/personal/list.css" />
+			<header><a id='backTo' href='../../index.html' data-ajax='false'></a>个人中心</header>
+			<div id="content" class="content">
+				<div id="backInfo" class="backInfo">
+					<div class="personalInfo" id="personalInfo">
+						<!-- userInfo -->
+					</div>
+				</div>
+				<ul class="listBox">
+					<li id="publish" class="listPublish">发布管理<b class="listBold">&#8250;</b></li>
+					<li id="information">消息盒子<span id="countBox"></span><b class="listBold">&#8250;</b></li>
+					<li id="setting">设置<em class="divVersion"></em><b class="listBold">&#8250;</b></li>
+				</ul>
+				<a href="javascript:;" data-role="button" class="logoutBtn" id="logoutBtn" data-rel="popup" data-position-to="window">退出账号</a>
+			</div>
+			<script>
+			  window.onload=function()
+			  {
+			  	setTimeout(function()
+		  		{
+			   	 $('#logoutBtn').css({'top':Math.min(parseInt($(window).height()),parseInt(window.screen.height)) - window.statusHeight - parseInt($('#logoutBtn').height()),'visibility':'visible'});
+		  		},30);
+			  };
+			</script>
+			<script id="personalInfoList" type="text/x-handlebars-template">
+			{{#userInfo}}
+				<div class="borderImg">
+				 <div class="auxiliary"><img src="{{#if imgSrc}}{{imgSrc}}{{else}}../../images/family_people.jpg{{/if}}" onerror='this.src="../../images/family_people.jpg"' class="headImg">
+				  </div>
+				 </div>
+				<p class="name">{{name}}</p>
+				<p class="department">{{department}}</p>
+     		{{/userInfo}}
+			</script>
+			<script id="messageCount" type="text/x-handlebars-template">
+			{{#userInfo}}
+				{{#if messageCount}}
+					<span class="numBox">{{messageCount}}</span>
+				{{/if}}
+     		{{/userInfo}}
+			</script>
+			<script src="../../js/personal/index.js"></script>
+			<script>
+			if(window.is40){
+				$(function(){
+					var url = window.duLife.URLS.ucIndex; 
+					$.jsonp({
+						type:'get',
+						url:url,
+						callbackParameter: 'callback',
+						timeout:5000,
+                        beforeSend: function(){
+                            // validSession('../../login.html',this);
+                        },
+						success:function(json){
+							convertTemplete(json);
+							checkVersion();
+						},
+						error:function(){
+							$.duLife.fns.tips('亲，网络环境不稳定，请刷新重试')
+						},
+						complete:function(){}
+					});
+					
+					function handleBars(target,template,json){
+				       var tpl= template.html();
+				       var template = Handlebars.compile(tpl);
+				       target.html(template(json));
+				    };
+				    function convertTemplete(json){
+						handleBars($('#personalInfo'),$('#personalInfoList'),json);
+						handleBars($('#countBox'),$('#messageCount'),json);
+					};	
+				    $('#personalCenter').delegate('#publish','click', function(){
+				        $.mobile.changePage('../../view/personal/publish.html',{transition :'none'});
+				     });
+				    $('#personalCenter').delegate('#information','click', function(){
+
+				        $.mobile.changePage('../../view/personal/information.html',{transition :'none'});
+				     });
+				    $('#personalCenter').delegate('#setting','click', function(){
+				    	setTimeout(function()
+						{
+						  $.mobile.changePage('../../view/personal/setting.html',{transition :'none'});
+						},30);
+				     });
+				     
+				    $(document).on("pagebeforeshow","#personalCenter",function(){
+						checkVersion();
+					});
+	
+					function checkVersion(){
+						if(parseInt(localStorage.getItem("updatedEnabled"))){
+							$('#setting .divVersion').css("display","inline-block");
+						}
+					};
+				});
+			}
+			</script>
+		</div>
+	</body>
+</html>

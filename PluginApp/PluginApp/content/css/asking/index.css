@@ -1,0 +1,17 @@
+body{height:100%; overflow: hidden;}
+#wrapper{background:#f9f9f9;height:100%;}
+#mainWrapper{padding:0 0.8rem;}
+#askList{padding:1rem 0 5rem;}
+.situation{border:0.1rem solid #ececec;padding:0.8rem;font-size:1.4rem;position:relative;margin-bottom:0.8rem;background:#ffffff;overflow:hidden;}
+.situation p{color:#999999;font-size:1.4rem;padding:0.2rem 0 0.8rem;}
+.situation .returnTime{text-align:right;font-size:1.2rem;padding:0.8rem 0 0;}
+.situation .question{font-size:1.6rem;line-height:24px;word-break: break-all;word-wrap: break-word;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;}
+.situation .trapezoid{border-bottom: 24px solid #48b0ed; border-left: 24px solid transparent; border-right: 24px solid transparent; height: 0; width:38px;color:#ffffff;font-size:1.2rem; text-align:center;line-height:24px;-webkit-transform: rotate(45deg);position:absolute;right:-24px;top:8px;}
+.situation .terminate{border-bottom: 24px solid #cccccc;}
+.situation .examineClosely{border-bottom: 24px solid #ffd200;}
+.situation .newAsk{border-bottom: 24px solid #8cd5c4;}
+.tips{text-align:center;color:#999999;padding-bottom:1rem;}
+#askQuestion{visibility:hidden;background:#42DAB5;color:#ffffff;height:5rem;position:fixed;bottom:0;text-align:center;width:100%;}
+#askQuestion span{display:inline-block;line-height:5rem;font-size:1.6rem;background: url(../../images/tiwen.png) no-repeat left center;background-size:2rem;padding-left:2.5rem;}
+#askingGenre #mainWrapper{padding:0;}
+#asking #mainWrapper .noComment{color:#999999;text-align:center;font-size:1.8rem;padding-top:50%}

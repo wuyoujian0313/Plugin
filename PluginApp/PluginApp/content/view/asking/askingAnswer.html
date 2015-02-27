@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>度生活</title>
+    <meta name="description" content=""/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="viewport" content="width=device-width, maximum-scale=1.0, user-scalable=0, initial-scale=1.0"/>
+    <!-- <meta name="viewport" content="maximum-scale=0.5,minimum-scale=0.5, user-scalable=no, initial-scale=0.5, target-densitydpi=high-dpi"/> -->
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta content="telephone=no" name="format-detection">
+    <link rel="stylesheet" href="../../lib/jqm/css/themes/default/jquery.mobile-1.3.2.min.css" type="text/css"/>    
+    <link rel="stylesheet" href="../../js/widgets/simpledialog/jquery.mobile.simpledialog.css" />
+    <link rel="stylesheet" href="../../js/widgets/refresh/refresh.css" type="text/css"/>
+    <link rel="stylesheet" href="../../css/common.css" type="text/css"/>
+    <script type="text/javascript" src="../../lib/jqm/js/jquery.js"></script>
+    <script>
+    $(document).bind("mobileinit", function(){
+         $.mobile.selectmenu.prototype.options.nativeMenu = false;
+    });
+    </script>
+    <script type="text/javascript" src="../../lib/jqm/js/jquery.mobile-1.3.2.min.js"></script>
+    <script type='text/javascript' src='../../lib/handlebars.js'></script>
+    <script type='text/javascript' src='../../lib/registerHelper.js'></script>
+    <script type="application/javascript" src="../../js/widgets/device.js"></script>
+    <script type="application/javascript" src="../../js/widgets/simpledialog/jquery.mobile.simpledialog.js"></script>
+    <script type="application/javascript" src="../../js/widgets/iscroll/iscroll.js"></script>
+    <script type='text/javascript' src='../../js/widgets/refresh/refresh.js'></script>
+    <script type="application/javascript" src="../../js/widgets/jquery.jsonp.js"></script>
+    <script type='text/javascript' src='../../js/config.js'></script>
+    <script type='text/javascript' src='../../js/common.js'></script>
+</head>
+<body id="body">
+<div data-role='page' id='askingAnswer'>
+ <div id="askAnswerMbIos">
+    <link rel="stylesheet" href="../../css/asking/askingAnswer.css" type="text/css"/>
+    <script type='text/javascript' src='../../js/widgets/iscroll/iKeyboardScroll.js'></script>
+    <header><a id='backTo' href='../../view/asking/index.html'data-ajax='false'></a></header>
+    <div id='wrapper'>
+        <div id='mainWrapper'>
+            <div id='scroller'>
+                <div id="askingContent">
+                    <!--tpl_askingContent-->
+                </div>
+            </div>
+            <!--<div id="loadImg"><img src='../../images/loading1.gif' /></div>-->
+        </div>
+    </div>
+    <div class="askingMenu" id="askingMenu">
+        <!--tpl_askingMenu-->
+    </div>
+    <script id="tpl_askingContent" type="text/x-handlebars-template">
+        <div id="topic" topic="{{topicID}}" category="{{categoryID}}" data-id="{{id}}">
+            {{#each question}}
+            <div class="question" twId="{{this.id}}">
+                <p class="twQuestion clearfix"><span class="fl trace">追问</span><span class="fr">{{dateFormat today this.createDate 'YYYY-MM-DD HM' false}}</span></p>
+                <div class="questionCon">{{this.title}}</div>
+            </div>
+            <div class="answer">
+                {{#if this.content}}
+                <p class="twQuestion clearfix"><span class="fl">回答</span><span class="fr">{{#if this.replyDate}}{{dateFormat today this.replyDate 'YYYY-MM-DD HM' false}}{{/if}}</span></p>
+                <pre>{{this.content}}</pre>
+                {{/if}}
+            </div>
+            {{/each}}
+        </div>
+    </script>   
+    <script id="tpl_askingMenu" type="text/x-handlebars-template">
+        {{#compare answer '!=' '已结束'}}
+        <div class="askStatus">
+            {{#compare answer '==' '有追问'}}
+                <div class="bg"><div class="modify"><span>我要修改</span></div></div>
+                <div class="bg"><div class="resolve"><span>问题已解决</span></div></div>
+            {{/compare}}
+            {{#compare answer '==' '有回复'}}
+                <div class="bg"><div class="resolve"><span>问题已解决</span></div></div>
+                <div class="bg"><div class="traceQet"><span>我还要追问</span></div></div>
+            {{/compare}}
+            {{#compare answer '==' '新问题'}}
+                <div class="bg"><div class="modify"><span>我要修改</span></div></div>
+                <div class="bg"><div class="noAsk"><span>不想问了</span></div></div>
+            {{/compare}}
+        </div>
+        {{/compare}}
+        <div class="askAgain">
+            <div class="againBox">
+                <textarea id="txtAsk" placeholder="最多可输入300字符"></textarea>
+                <div class="askBtn"><span>提&nbsp;交</span></div>
+            </div>
+        </div>
+    </script>
+    <script type='text/javascript'>
+    if(window.is40)
+    {
+      ;(function($,window){
+            window.$mainView = $('#askingAnswer #askingMenu');
+            var answerScroll;
+            window.loadAnswerData = function(options){
+            var options = options || {};
+            var dataHandle = options.dataHandle || function(data){$mainView.html(data)};
+            var paramData = $.duLife.fns.getUrlParam();
+            var id = paramData.id;
+            var categoryName = paramData.categoryName || '';
+            var cb = options.cb || function(){};
+            $.mobile.activePage.find('header').html('<a id="backTo" href="../../view/asking/index.html" data-ajax="false" class="ui-link"></a>'+categoryName);
+            $.jsonp({
+                url: window.duLife.URLS.askingAnswer,
+                callbackParameter: 'callback',
+                timeout:8000,
+                data: {id:id},
+                beforeSend: function(xhr){
+                },
+                success: function(data){
+                    handleBars($('#askingContent'),$('#tpl_askingContent'),data);
+                    handleBars($('#askingMenu'),$('#tpl_askingMenu'),data);
+                    $('#askingMenu .bg').on({
+                        'touchstart':function()
+                        {
+                            $(this).addClass('hover');
+                        },
+                        'touchend':function()
+                        {
+                            $(this).removeClass('hover');
+                        }
+                    });
+                    if(data.answer=='有回复')
+                    {
+                        $('#askingAnswer #backTo').removeAttr('href');
+                        $('#askingAnswer #backTo').click(function()
+                        { 
+                            var _this=$(this);
+                            commentDialog(_this);
+                            $('.praiseBox #simpleclose').click(function()
+                            {
+                                window.location.href='../../view/asking/index.html';
+                            });
+                        });
+                    };
+                    $('#askingContent .question').eq(0).find('.trace').text('提问');
+                    setTimeout(function(){
+                        var padBot=$('#askingMenu')[0].offsetHeight;
+                        $('#askingMenu').css({'top':Math.min(parseInt($(window).height()),parseInt(window.screen.height)) - window.statusHeight - padBot,'visibility':'visible'})
+                        var wrapper = $('#askingAnswer #mainWrapper');
+                        wrapper.css('height',Math.min(parseInt($(window).height()),parseInt(window.screen.height)) - window.statusHeight - parseInt($('header').height()));
+                        answerScroll = new iScroll(wrapper[0]);
+                     },200); 
+                   var topicID = $('#topic').attr('topic');
+                   var categoryID = $('#topic').attr('category');
+                   /*修改*/
+                   $mainView.delegate('.modify','click',function()
+                    {
+                        var paramData = $.duLife.fns.getUrlParam();
+                        var id = $('#topic').attr('data-id');
+                        $.jsonp({
+                            url: window.duLife.URLS.modifyAsking,
+                            callbackParameter: 'callback',
+                            timeout:8000,
+                            data: {id:id,categoryID:categoryID},
+                            beforeSend: function(xhr){
+                            },
+                            success: function(data){
+                                var categoryName=data.question.categoryName;
+                                var title=data.question.title;
+                                window.params ={title:title,categoryName:categoryName,topicID:topicID,categoryID:categoryID,id:id};
+                                $.mobile.changePage('../../view/asking/askingQuestion.html',{transition :'none'});
+                            },
+                            error: function(args){
+                             $.duLife.fns.tips('亲，网络环境不稳定，请刷新重试');
+                                return false;
+                            },
+                            complete: function(xhr){
+                    
+                            }
+                        });
+
+                    });
+                    /*提问*/
+                    $mainView.delegate('.traceQet','click',function(){
+                      window.params ={againAsk:'ok',categoryName:categoryName,topicID:topicID,categoryID:categoryID};
+                     $.mobile.changePage('../../view/asking/askingQuestion.html',{transition :'none'});
+                    });
+                    cb && cb();
+                },
+                error: function(args){
+                 $.duLife.fns.tips('亲，网络环境不稳定，请刷新重试');
+                    cb && cb();
+                    return false;
+                },
+                complete: function(xhr){
+        
+                }
+            });
+        };
+        $('#askingAnswer').on('pagebeforeshow',function(){
+            loadAnswerData();
+        });
+       /*问题已解决*/
+       $mainView.delegate('.resolve','click',function(){
+            var _this=$(this);
+            commentDialog(_this);
+       });
+     function commentDialog(obj)
+     {
+        obj.simpledialog({
+                            'mode' : 'blank',
+                            'prompt' : false,
+                            'transition':'pop',
+                            'cleanOnClose':false,
+                            'allowReopen':true,
+                            'useDialogForceFalse':true,
+                            'forceInput':false,
+                            'fullHTML':"<div class='praiseBox'><p class='praiseTitle'>请对HR&nbsp;MM的服务打分</p><p class='praiseTips'>评价后该话题将会结束哦</p><div class='zbz'><div class='zyg'><div><span class='zan'></span></div><span>赞一个</span></div><div class='bgz'><div><span class='bZan'></span></div><span>不给赞</span></div></div><span id='simpleclose' rel='close'></span></div>",
+                             'onCreated':function(d){
+                                d.pickerContent.addClass('confirm-dialog');
+                                d.pickerContent.find('.zyg').click(function()
+                                {
+                                    yesOrNo('.zyg','disabled',1)
+
+                                }); 
+                                d.pickerContent.find('.bgz').click(function()
+                                {
+                                    yesOrNo('.bgz','disabled',0)
+
+                                });
+                            }
+                        });
+     };
+     //赞不赞
+     function yesOrNo(className,disClass,isSupportValue)
+     {
+            var $target=$(this);
+            if($target.hasClass(disClass)) return;
+            $target.addClass(disClass);
+            var paramData = $.duLife.fns.getUrlParam();
+            var id = paramData.id;
+            var json={'questionID':id,'isSupport':isSupportValue}
+            $.jsonp({
+                type: 'post',
+                url: window.duLife.URLS.suppory,
+                callbackParameter: 'callback',
+                timeout:5000,
+                data: json,
+                beforeSend: function(){
+                    //validSession('../../login.html',this);
+                },
+                success: function (data) {
+                    if (data.success) {
+                        $.duLife.fns.tips(data.message);
+                        setTimeout(function () {
+                            $.mobile.activePage.find(className).removeClass(disClass);
+                            window.location.href='../../view/asking/index.html';
+                        }, 1000)
+                    } else {
+                        $.duLife.fns.tips(data.message);
+                        $.mobile.activePage.find(className).removeClass(disClass);
+                    }
+                },
+                error: function (args) {
+                    $.duLife.fns.tips('亲，网络环境不稳定，请刷新重试');
+                    $.mobile.activePage.find(className).removeClass(disClass);
+                    return false;
+                }
+            })
+     }
+     //不问了
+       $mainView.delegate('.noAsk','click',function()
+        {
+            var paramData = $.duLife.fns.getUrlParam();
+            var id = paramData.id;
+            var $target=$(this);
+            if($target.hasClass('disabled')) return;
+            $target.addClass('disabled');
+            setTimeout(sureOrCancle({message:'是否删除该提问？',
+                                        json:{id:id},
+                                   className:'.noAsk',
+                                    disClass:'disabled',
+                                         url:window.duLife.URLS.noAsking,
+                                          cb: delDom
+            }),500);
+        });
+       function delDom()
+        {
+            $('#askingContent').html('');
+            $.mobile.changePage('../../view/asking/index.html',{transition :'none'});
+        };
+        function handleBars(target,template,json){
+           var tpl= template.html();
+           var template = Handlebars.compile(tpl);
+           target.html(template(json));
+        };
+        function sureOrCancle(options)
+        {
+            var options = options || {};
+            var message = options.message;
+            var json = options.json;
+            var msSuccess = options.msSuccess;
+            var msFaild = options.msFaild;
+            var className = options.className;
+            var disClass = options.disClass || 'disabled';
+            var cb = options.cb || function(){};
+            var url = options.url;
+            $.duLife.fns.confirm(message, function () {
+                $.jsonp({
+                    type: 'post',
+                    url: url,
+                    callbackParameter: 'callback',
+                    timeout:5000,
+                    data: json,
+                    beforeSend: function(){
+                       
+                    },
+                    success: function (data) {
+                        if (data.success) {
+                            $.duLife.fns.tips(data.message);
+                            setTimeout(function () {
+                                $.mobile.activePage.find(className).removeClass(disClass);
+                                cb && cb();
+                            }, 500)
+                        } else {
+                            $.duLife.fns.tips(data.message);
+                            $.mobile.activePage.find(className).removeClass(disClass);
+                        }
+                    },
+                    error: function (args) {
+                        $.duLife.fns.tips('亲，网络环境不稳定，请刷新重试');
+                        $.mobile.activePage.find(className).removeClass(disClass);
+                        return false;
+                    }
+                })
+            },function(){
+                $.mobile.activePage.find(className).removeClass(disClass);
+            });
+        };
+    })(jQuery,window);
+    };
+    </script>
+    <script type='text/javascript' src='../../js/asking/askingAnswer.js'></script>
+</div>
+</div>
+</body>
+</html>

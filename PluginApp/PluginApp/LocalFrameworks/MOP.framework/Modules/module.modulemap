@@ -1,0 +1,6 @@
+framework module MOP {
+  umbrella header "MOP.h"
+
+  export *
+  module * { export * }
+}

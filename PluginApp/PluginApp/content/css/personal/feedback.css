@@ -1,0 +1,30 @@
+@charset "utf-8";
+/* CSS Document */
+
+.mainBox {
+	padding: 5rem 0.8rem 0;
+	overflow-x: hidden;
+}
+.mainBox #textareaBox {
+	border: 0.1rem solid #47b1ed;
+	background: #ffffff;
+	height:10rem;
+	max-height:10rem;
+	outline: none;
+	line-height: 1.8rem;
+	background: none;
+	box-shadow: none;
+	border-radius: 0;
+}
+.mainBox .ui-btn {
+	background: #48b0ed;
+	color: #ffffff;
+	border: 0px;
+	border-radius: 3px;
+	margin: 1rem 0;
+	font-size: 1.4rem;
+	cursor: pointer;
+	outline: none;
+	text-shadow: none;
+	box-shadow: none;
+}

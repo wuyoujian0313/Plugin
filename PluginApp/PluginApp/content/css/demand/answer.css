@@ -1,0 +1,14 @@
+body{height:100%; overflow: hidden;}
+#wrapper{background:#f9f9f9;height:100%;}
+#demandContent{font-size:1.6rem;}
+.question{background:#ffffff;padding:0 0.8rem;line-height:24px;}
+.question div{padding:1.3rem 0.1rem;border-bottom: 0.1rem dashed #D4D4D4;word-break: break-all;}
+.answer{padding:1.3rem 1.1rem;line-height:24px;word-break: break-all;word-wrap: break-word;}
+.nextQuestion{padding:0 0.8rem 0.8rem;position:fixed;bottom:0;box-sizing:border-box;width:100%;background:#fcfcfc;visibility:hidden;}
+.nextQuestion div{background:#42DAB5;padding:0.5rem;color:#ffffff;line-height:24px;}
+.questionCon{font-size:1.4rem;color:#baffee;word-break: break-all;}
+.conTac{text-align:center;}
+.answer font{float:left;}
+.answer prv{float:right;}
+#demandAnswer .noComment{color:#999999;text-align:center;font-size:1.8rem;padding-top:50%}
+

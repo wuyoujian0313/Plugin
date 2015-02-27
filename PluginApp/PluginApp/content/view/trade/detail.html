@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ 	<meta charset="utf-8"/>
+    <title>度生活</title>
+    <meta name="description" content=""/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="viewport" content="width=device-width, maximum-scale=1.0, user-scalable=0, initial-scale=1.0"/>
+    <meta content="telephone=no" name="format-detection">
+    <link rel="stylesheet" href="../../lib/jqm/css/themes/default/jquery.mobile-1.3.2.min.css" type="text/css"/>    
+    <link rel="stylesheet" href="../../js/widgets/simpledialog/jquery.mobile.simpledialog.css" />
+    <link rel="stylesheet" href="../../js/widgets/refresh/refresh.css" type="text/css"/>
+    <link rel="stylesheet" href="../../css/common.css" type="text/css"/>
+    <script type="text/javascript" src="../../lib/jqm/js/jquery.js"></script>
+    <script>
+    $(document).bind("mobileinit", function(){
+         $.mobile.selectmenu.prototype.options.nativeMenu = false;
+    });
+    </script>
+    <script type="text/javascript" src="../../lib/jqm/js/jquery.mobile-1.3.2.min.js"></script>
+    <script type='text/javascript' src='../../lib/handlebars.js'></script>
+    <script type='text/javascript' src='../../lib/registerHelper.js'></script>
+    <script type="application/javascript" src="../../js/widgets/simpledialog/jquery.mobile.simpledialog.js"></script>
+    <script type="application/javascript" src="../../js/widgets/iscroll/iscroll.js"></script>
+    <script type='text/javascript' src='../../js/widgets/refresh/refresh.js'></script>
+    <script type="application/javascript" src="../../js/widgets/device.js"></script>
+    <script type="application/javascript" src="../../js/widgets/jquery.jsonp.js"></script>
+    <script type='text/javascript' src='../../js/config.js'></script>
+    <script type='text/javascript' src='../../js/common.js'></script>
+  </head>
+<body id="body">
+<div data-role="page" id="tradeDetail">
+    <link rel="stylesheet" href="../../css/menu.css" type="text/css"/>
+	<link rel="stylesheet" href="../../css/trade/detail.css" />
+    <div id="wrap">
+        <header><a id='backTo' href='javascript:;' data-rel='back'></a>跳蚤街</header>
+        <div id="mainView">
+        	<!---tpl_goods-->
+        </div>
+    </div>
+	<script id="tpl_goods" type="text/x-handlebars-template">
+	{{#goods}}
+	<div id="tradeWrapper">
+		<div class="mainBox" goodsid="{{id}}">
+			<div class="clearfix inforBox">
+				<div class="inforLeft"><div class="emBox"><em><img src="{{#if authorImgSrc}}{{authorImgSrc}}{{else}}../../images/family_people.jpg{{/if}}" onerror='this.src="../../images/family_people.jpg"'  /></em></div><span>{{author}}</span></div>
+				<div class="inforRigth">
+					<h2>{{title}}</h2>
+					<p>{{dateFormat today pubDate 'YYYY-MM-DD' false}} <span class="fr"><b>{{clickCount}}</b></span></p>
+				</div>
+			 </div>  
+			<ul class="detail clearfix">
+				<li><b>价格：</b><font color="#f77f00">{{price}}</font>元</li>
+				<li><b>电话：</b>{{phone}}</li>
+				<li><b>我想：</b>{{type}}</li>
+				<li><b>形式：</b>{{method}}</li>
+				<li><b>类型：</b>{{goodsType}}</li>
+				<li><b>位置：</b>{{#if prov}}{{prov}}{{/if}}{{#if city}}-{{city}}{{/if}}</li>
+			</ul>
+			<div class="content">
+				<div class="contentText" id="contentText">{{{content}}}</div>
+				<div>
+				{{#each pics}}
+				<img src='{{this}}' />
+				{{/each}}
+				</div>
+			</div>
+		</div>
+	</div>
+	{{#if (readoutValue status '发布')}}
+	<menu id="menu"><a articleid="{{articleId}}" id='{{id}}' class="lookComment"><span></span><em>评论{{#if commentCount}}{{#compare commentCount '>' 999}}(999+){{/compare}}{{#compare commentCount '<=' 999}}({{commentCount}}){{/compare}}{{else}}(0){{/if}}</em></a><a articleid="{{articleId}}" id={{id}} class="writeComment"><span></span><em>写评论</em></a><a href="tel:{{#isPhone phone}}{{phone}}{{else}}{{tel}}{{/isPhone}}" class="phone"><span></span><em>打电话</em></a></menu>
+	{{/if}}
+	{{/goods}} 
+    </script>
+	<script type='text/javascript' src='../../js/trade/detail.js'></script>
+	<script type='text/javascript'>
+	if(window.is40){
+		// JavaScript Document
+		 ;(function($,window){
+		    window.$mainView = $('#tradeDetail #mainView');
+		    var tradeDetailScroll;
+		    window.loadtradeDetialData = function(options){
+		        var options = options || {};
+		        var type = options.type || 'all';
+		        var dataHandle = options.dataHandle || function(data){$mainView.html(data)};
+		        var cb = options.cb || function(){};
+		        var paramData = $.duLife.fns.getUrlParam();
+		        var id = paramData.id || null;
+		        var articleId = paramData.articleId || null;
+		        $.jsonp({
+		            url: window.duLife.URLS.goodsDetail,
+		            callbackParameter: 'callback',
+		            timeout:8000,
+		            data: {
+		                id:id,
+		                articleId:articleId
+		            },
+	                beforeSend: function(){
+	                    // validSession('../../login.html',this);
+	                },
+		            success: function(data){
+		                var status=data.goods.status;
+		                var src_goods = $('#tpl_goods').html();
+		                var tpl_goods = Handlebars.compile(src_goods);
+		                dataHandle(tpl_goods(data));
+		                $("#contentText").find('img').css({'max-width':'100%','height':'auto'});
+                		$("#contentText").find("input[type=image]").css({'max-width':'100%','height':'auto'});                
+		                setTimeout(function(){
+		                    if(status=='发布')
+		                    {
+		                        $('#tradeWrapper').css('height',Math.min(parseInt($(window).height()),parseInt(window.screen.height)) - window.statusHeight - parseInt($('header').height()) - parseInt($('#tradeDetail menu').height())); 
+		                    }
+		                    else
+		                    {
+		                       $('#tradeWrapper').css('height',Math.min(parseInt($(window).height()),parseInt(window.screen.height)) - window.statusHeight - parseInt($('header').height())); 
+		                    }
+		                    tradeDetailScroll = new iScroll('tradeWrapper');
+		                    $('menu').css({'top':Math.min(Math.min(parseInt($(window).height()),parseInt(window.screen.height)) - window.statusHeight ,parseInt(window.screen.height)) - parseInt($('#tradeDetail menu').height()),'visibility':'visible'});
+		                },500);
+		                $('menu>a').on({
+		                    'touchstart':function()
+		                    {
+		                        $(this).addClass('hover');
+		                    },
+		                    'touchend':function()
+		                    {
+		                        $(this).removeClass('hover');
+		                    }
+		                });
+		                $('menu').delegate('.writeComment','click',function(){
+		                    var articleid = $(this).attr('articleid');
+		                    var id = $(this).attr('id');
+		                    if(window.is40){
+		                        window.params = {'commentType':'跳蚤街','articleid':articleid,'id':id};
+		                        $.mobile.changePage('../../view/life/life_comment.html',{transition :'none'});
+		                    }else{
+		                        $.mobile.changePage('../../view/life/life_comment.html?commentType=跳蚤街&articleid='+articleid,{transition :'none'});
+		                    }
+		                });
+		                $('menu').delegate('.lookComment','click',function(){
+		                    var articleid = $(this).attr('articleid');
+		                    var id = $(this).attr('id');
+		                    if(window.is40){
+		                        window.params = {'comListType':'跳蚤街','articleid':articleid,'id':id};
+		                        $.mobile.changePage('../../view/life/comment_list.html',{transition :'none'});
+		                    }else{
+		                        $.mobile.changePage('../../view/life/comment_list.html?comListType=跳蚤街&articleid='+articleid,{transition :'none'});
+		                    }
+		                });
+		                cb && cb();
+		            },
+		            error: function(args){
+		                $.duLife.fns.tips("加载数据错误~");
+		                return false;
+		            }
+		        });
+		        // var src_goods = $('#tpl_goods').html();
+		        // var tpl_goods = Handlebars.compile(src_goods);
+		        // dataHandle(tpl_goods(window.duLife.feData.goodsDetail));
+		        // setTimeout(function(){
+		        //     $('#tradeWrapper').css('height',Math.min(parseInt($(window).height()),parseInt(window.screen.height)) - window.statusHeight  - parseInt($('#mainView').offset().top) - parseInt($('#tradeDetail menu').height()));
+		        //     tradeDetailScroll = new iScroll('tradeWrapper');
+		        // },500)
+		    };
+		    //初始化加载数据
+		    $('#tradeDetail').on('pagebeforeshow',function(){
+		       loadtradeDetialData();
+		    });
+		})(jQuery,window);
+
+
+	}
+	</script>
+</div>
+</body>
+</html>

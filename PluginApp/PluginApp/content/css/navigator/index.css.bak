@@ -1,0 +1,60 @@
+ .ui-overlay-c{overflow:hidden;}
+  #navbody{
+    width: 100%;
+  }
+  #navigator{
+    position: relative; 
+    overflow: hidden; 
+    width:100%;
+    height:100%;
+
+  }
+  #navphoto{
+    overflow: hidden;
+    width: 400%;
+    position: relative;
+    left: 0;
+    top:0;
+  }
+
+  #navphoto li{
+    display: inline-block;
+    width: 25%;
+    float: left;
+    list-style: none;
+    text-align: center;
+    background:center center;
+    background-size:100% auto;
+        
+  }
+  #navphoto li:nth-child(1){
+    background-image:url(../../images/login/1.png);
+  }
+  #navphoto li:nth-child(2){
+    background-image:url(../../images/login/2.png);
+  }  
+  #navphoto li:nth-child(3){
+    background-image:url(../../images/login/3.png);
+  }  
+  #navphoto li:nth-child(4){
+    background-image:url(../../images/login/4.png);
+  }
+  .navDot{
+        width: 9rem;
+        position: absolute;
+        bottom: 4rem;
+        left:50%;
+        margin-left:-4rem; 
+        border: none;
+    }
+    .navDot a{
+        width:1.5rem;
+        height: 1.5rem;
+        background: #fff000;
+        display: inline-block;
+        text-align: center;
+        line-height: 1.5rem;
+        margin: 0 0.25rem;
+        display: none;
+        /*background: url(../../images/main/focus02.png) no-repeat left;*/
+    }

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>意见反馈</title>
+<meta name="description" content=""/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="default"/>
+<meta name="viewport" content="width=device-width; height=device-height; initial-scale=1.0"/>
+<link rel="stylesheet" href="../../lib/jqm/css/themes/default/jquery.mobile-1.3.2.min.css" type="text/css"/>
+<link rel="stylesheet" href="../../css/common.css" type="text/css"/>
+<script type="text/javascript" src="../../lib/jqm/js/jquery.js"></script>
+<script>
+$(document).bind("mobileinit", function(){
+     $.mobile.selectmenu.prototype.options.nativeMenu = false;
+});
+</script>
+<script type="text/javascript" src="../../lib/jqm/js/jgestures.min.js"></script>
+<script type="text/javascript" src="../../lib/jqm/js/jquery.mobile-1.3.2.min.js"></script>
+<script type='text/javascript' src='../../lib/handlebars.js'></script>
+<script type='text/javascript' src='../../js/common.js'></script>
+<script type='text/javascript' src='../../js/config.js'></script>
+</head>
+<body id="body">
+<div data-role="page" id="feedbackPage">
+    <link rel="stylesheet" href="../../css/personal/feedback.css" />
+    <header><a href="../../view/personal/setting.html" id="backTo" data-ajax='false'></a>意见反馈</header>
+    <div class="mainBox">
+    	<form action="" method="post" id='feedbackForm'>
+        	<textarea name="" id="textareaBox" placeholder="请填写您的反馈意见..."></textarea>
+        	<input type="button" id="formBtn" value="提&nbsp;交" />
+    	</form>
+	</div>
+	<script src="../../js/personal/feedback.js"></script>
+    <script>
+    if(window.is40){
+        ;(function($){
+            //validSession('../../login.html');
+//window.updateTokenFn();
+
+            $('#formBtn').on('click',function(){
+                if($(this).hasClass('disable'))return;
+                var val = $.trim($('#textareaBox').val());
+                if(val){
+                    var json={
+                        'opinion':val
+                    };
+                    var url = window.duLife.URLS.submitFeedback;
+                    $(this).addClass('disable');
+
+                    $.jsonp({
+                        type:'get',
+                        url: url,
+                        callbackParameter: 'callback',
+                        timeout:5000,
+                        data: json,
+                        beforeSend: function(){
+                            // validSession('../../login.html',this);
+                        },
+                        success: function(data){
+                            if(data.success){
+                                $.duLife.fns.tips('反馈成功');
+                                setTimeout(function(){
+                                    $('#feedbackPage #backTo').trigger('click');
+                                },1000);
+                            }else{
+                                $.duLife.fns.alert('反馈失败');
+                            }
+                            $('#formBtn').removeClass('disable');
+                        },
+                        error: function(args){
+                            $.duLife.fns.tips('亲，网络环境不稳定，请刷新重试');
+                            return false;
+                        }
+                    })
+                }else{
+                    $.duLife.fns.tips('请输入想要反馈的内容');
+                    $('#formBtn').removeClass('disable');
+                }
+            });
+        })(jQuery);
+    }
+    </script>
+</div>
+</body>
+</html>

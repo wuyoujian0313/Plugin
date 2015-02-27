@@ -1,0 +1,46 @@
+body{height:100%; overflow: hidden;}
+#wrapper{background:#f9f9f9;height:100%;}
+#askingContent{font-size:1.6rem;padding-bottom:5rem;}
+.question{background:#ffffff;padding:0 0.8rem;line-height:24px;}
+.twQuestion{padding:1.3rem 0.1rem 0.8rem;}
+.twQuestion .fl{background:#42DAB5;color:#ffffff;font-size:1.4rem;padding:0.1rem 1rem;display:inline-block;}
+.twQuestion .fr{color:#999999;font-size:1.2rem;}
+.question .questionCon,.answer pre{padding:0 0.1rem 1.3rem;line-height:24px;word-break: break-all;border-bottom: 0.1rem dashed #D4D4D4;}
+.answer{padding:0 0.8rem;line-height:24px;word-break: break-all;word-wrap: break-word;}
+.answer .twQuestion .fl{background:#48b0ed;}
+.askingMenu{position:fixed;bottom:0;width:100%;height:5rem;visibility:hidden;z-index:99;}
+.askStatus{background:#42DAB5;display:-webkit-box;height:5.2rem;}
+.askStatus .bg{-webkit-box-flex:1;display:block;text-align:center;padding:0.5rem 0;}
+.askStatus .bg div{height:4rem;}
+.askStatus div span{color:#ffffff;font-size:1.6rem;display:inline-block;padding-left:2.5rem;line-height:4rem;}
+.askStatus .resolve,.askStatus .modify{border-right:1px solid #54e7c3;}
+.askStatus .resolve span{background: url(../../images/yijiejue.png) no-repeat left center;background-size:2rem;}
+.askStatus .traceQet span{background: url(../../images/zhuiwen.png) no-repeat left center;background-size:2rem;}
+.askStatus .modify span{background: url(../../images/tiwen.png) no-repeat left center;background-size:2rem;}
+.askStatus .noAsk span{background: url(../../images/bw.png) no-repeat left center;background-size:2rem;}
+.askAgain{background:#f5f5f5;height:auto;padding:0 0.8rem;font-size:1.4rem;position:relative;}
+.askAgain .againBox{display:-webkit-box;position:relative;height:5rem;}
+.askAgain textarea{-webkit-box-flex:1;display:block;border:1px solid #ececec;border-radius:0.3rem;background:#ffffff;height:3.3rem;margin:0.4rem 0;width:100%;padding:0.3rem;overflow:hidden;}
+.askAgain .askBtn{-webkit-box-flex:1;color:#ffffff;width:12.8rem;display:block;padding-left:1.2rem;}
+.askAgain .askBtn span{background:#42DAB5;padding:0.5rem 1rem;border-radius:0.2rem;display:inline-block;position:absolute;margin-top:-13px;top:50%;}
+.askAgain{display:none;}
+#askingMenu .hover{background:#33c09d;}
+#txtAsk{font-size:1.6rem;}
+/*问题已解决*/
+.praiseBox{padding:1.5rem 0.8rem 0;position:relative;}
+.praiseBox p{line-height:2.4rem;text-align:center;}
+.praiseTitle{font-size:1.6rem;}
+.praiseTips{font-size:1.4rem;color:#999999;border-bottom:0.1rem solid #ececec;padding-bottom:0.8rem;}
+.zbz{display:-webkit-box;padding-top:1rem;width:92%;margin:0 auto;padding-bottom:15px;}
+.zbz .zyg,.zbz .bgz{-webkit-box-flex:1;text-align:center;}
+.zbz span{background:no-repeat center center;display:block;text-shadow:none;font-size:1.4rem;color:#999999;padding-top:0.5rem;}
+.zyg div,.bgz div{border-radius:3rem;width:4.8rem;height:4.8rem;background-position:center center;display:inline-block;overflow:hidden;}
+.zyg div{background:#42DAB5;}
+.bgz div{background:#48b0ed;}
+.zyg .zan,.bgz .bZan{background-size:2.5rem;display:inline-block;width:3rem;height:3rem;padding-top:0.5rem;}
+.zyg .zan{background-image:url(../../images/good.png);padding-top:1.5rem;}
+.bgz .bZan{background-image: url(../../images/bugeizan.png);padding-top:2rem;}
+#askingAnswer .ui-simpledialog-container.confirm-dialog{height:auto;}
+.praiseBox #simpleclose{position:absolute;width:8rem;height:8rem;background:url(../../images/guanbi.png) 3.8rem 3.5rem no-repeat;right:-2rem;top:-3rem;background-size:1.8rem;}
+
+

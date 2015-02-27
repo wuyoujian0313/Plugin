@@ -1,0 +1,61 @@
+@charset "utf-8";
+/* CSS Document */
+#registerIndex{padding-bottom:4rem;background:#f9f9f9;}
+#registerIndex .more{font-size:1.6rem;text-shadow:none;color:#48b0ed;font-weight:normal;}
+.mainBox{position:fixed; top:4.4rem;width:100%;}
+#registerIndexScroller{width:100%;}
+.registerBox{padding:0 0.8rem 5rem;}
+.title{font-size:1.6rem;font-weight:normal;padding:1rem 0 0.5rem 0;}
+.title font{padding:0 0.2rem;}
+/*预约情况*/
+.situation{border:0.1rem solid #ececec;padding:0.8rem;font-size:1.4rem;position:relative;margin-bottom:0.8rem;background:#ffffff;}
+.situationBox{display:-webkit-box;padding-top:1rem;max-width:310px;margin:0 auto;}
+.situationBox p{line-height:2rem;}
+.situationBox p span{color:#999999;}
+.situationLeft{width:100px;padding:0.5rem 0;margin:0.5rem 0;border-right:0.1rem solid #ececec;text-align:center;margin-right:0.8rem;font-size:1.8rem;}
+.situation b{font-weight:normal;word-break: break-all;word-wrap: break-word;}
+.situationLeft span{font-size:1.2rem;}
+.situationRight{-webkit-box-flex:1;display: -webkit-box;-webkit-box-orient: vertical;width:100%;font-size:1.2rem;color:#333333;}
+.situationRight b{font-size:1.6rem;}
+.situationRight b.fs12{font-size:1.2rem;}
+.bot{border-bottom:0.1rem solid #ececec;padding-bottom:0.8rem;}
+.bot .tips{text-align:center;padding-top:0.5rem;color:#999999;}
+.situation .resultTips{font-size:1.2rem;text-align:center;color:#999999;line-height:2rem;padding-top:0.8rem;}
+.resultTips span{text-align:center;width:50%;display:inline-block;}
+.resultTips b{font-weight:normal;}
+/*显示状态*/
+.showSituation{position:absolute;top:0.5rem;left:-0.5rem;}
+.showSituation div{width:6rem;height:2rem;line-height:2rem;text-align:center;background:#8cd5c4;color:#ffffff;text-shadow:none;position:relative;font-size:1.2rem;}
+.showSituation div b{border-left:0.5rem dashed transparent;height:0;width:0;display:inline-block;position:absolute;top:2rem;left:0;}
+/*受理中*/
+.accept div{background:#8cd5c4;}
+.accept div b{border-top:0.5rem solid #589284;}
+/*等待受理*/
+.waitAccept div{background:#f8d32d;}
+.waitAccept div b{border-top:0.5rem solid #ddba1e;}
+.resultTips .modify{border-right:0.1rem solid #ececec;width:49%;}
+.resultTips b{background:no-repeat left center;background-size:1.8rem auto;padding-left:2rem;display:inline-block;color:#676767;font-size:1.6rem;}
+.resultTips .modify b{background-image:url(../../images/modify.png);}/*修改预约*/
+.resultTips .cancle b{background-image:url(../../images/delete.png);background-size:1.3rem auto;}/*取消预约*/.resultTips .afresh{background-image:url(../../images/afresh.png);background-size:1.3rem auto;}/*重新预约*/
+/*预约成功*/
+.success div{background:#41b76d;}
+.success div b{border-top:0.5rem solid #09975b;}
+/*预约被退回*/
+.sendBack div{background:#cccccc;}
+.sendBack div b{border-top:0.5rem solid #999999;}
+/*预约失败*/
+.faild div{background:#999999;}
+.faild div b{border-top:0.5rem solid #737373;}
+#registerBtn{position:fixed;text-align:center; width:100%; visibility: hidden;}
+#registerBtn a{background:#48b0ed;color:#ffffff;font-size:1.8rem;cursor:pointer;outline:none;text-shadow:none;box-shadow:none;width:100%;height:4.5rem;display:inline-block;text-decoration:none;text-align:center;font-weight:normal;line-height:4.5rem;}
+#registerBtn.disabled a{display:none;}
+/*更多*/
+#registerMoreList{
+	position:relative; top:4.4rem;
+}
+#registerMoreList li{border-bottom:0.1rem solid #ececec;height:4rem;line-height:4rem;font-size:1.6rem;padding: 0 0.8rem 0 1rem;
+overflow: hidden;}
+#registerMoreList li b{float:right;color:#999999;font-size:2.8rem;font-weight:normal;}
+#registerMoreList li a{font-size:1.4rem;color:#333;text-shadow:none;text-decoration:none;font-weight: normal;height:4rem;width:100%;display:inline-block;}
+
+

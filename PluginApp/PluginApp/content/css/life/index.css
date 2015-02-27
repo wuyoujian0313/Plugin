@@ -1,0 +1,64 @@
+
+body{
+	height:100%; overflow: hidden;
+}
+.tabBox{padding:0 0.8rem;display: -webkit-box;-webkit-box-flex: 1;}
+#lifeIndex #mainWrapper{
+	padding:0 0.8rem; position:relative; top:3.5rem;
+}
+.articleItem{
+	padding:0.8rem 0; border-bottom:1px solid #ececec; overflow: hidden;display:-webkit-box;
+}
+.articleItem>a{
+	display: block; overflow: hidden;
+}
+.articleItem .thumbnail{
+	width:125px; height:94px; margin-right:0.5rem; overflow: hidden;
+}
+
+.articleItem .thumbnail img{
+	display: block; width:100%;
+}
+.articleItem .articleInfo{
+	font-size:1.4rem;color:#999999;line-height:1.6rem;-webkit-box-flex:1;display: -webkit-box;-webkit-box-orient: vertical;width:100%;
+}
+.articleItem .articleInfo.nothumbnail{
+	width:100%; margin-left:0;
+}
+.articleItem .articleInfo h5{
+	color:#000; font-size:1.6rem; 
+	/*css实现超出字数显示省略号*/
+	overflow : hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    font-weight:normal;
+    line-height:1.8rem;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+.articleItem .articleInfo p{
+	color:#999; font-size:1.4rem;
+}
+.articleItem .articleInfo p.summary{
+	/*css实现超出字数显示省略号*/
+	overflow : hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    margin-top:0.3rem;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+.articleItem .articleInfo p:last-child{
+	font-size:1.2rem; overflow: hidden;margin-top:0.3rem;
+}
+.articleItem .articleInfo p:last-child span:last-child{
+	float:left; background: url(../../images/lookicon.png) no-repeat left 0.4rem; padding-left:1.8rem;
+	background-size:auto 58%; 
+}
+.articleItem .articleInfo p:last-child span:last-child{
+	float:right;padding-right:0.5rem;
+}

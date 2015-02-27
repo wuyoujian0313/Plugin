@@ -1,0 +1,87 @@
+body{
+	height:100%; overflow: hidden;
+}
+
+#tabTransfer{position:fixed; top:4.3rem; left:0; width:100%; font-size:1.6rem; border-bottom:0.1rem solid #40dbb3; height:3.6rem;line-height: 3.6rem;background: #fff; z-index:100;padding:0;display:-webkit-box;color:#999999;}
+#tabTransfer li{text-align: center;text-shadow:none;cursor:pointer;position:relative;-webkit-box-flex: 1;}
+#tabTransfer li.current{color:#000000;}
+#tabTransfer li.current span{height:0;font-size:0; border:0.1rem solid #40dbb3; position:absolute;bottom:0; left:0;display:inline-block;width:100%;}
+
+
+#lifeIndex #mainWrapper{
+	padding:0 0.8rem; position:relative; top:3.5rem;
+}
+.tabBox{
+	padding:0 0.8rem;
+	display: -webkit-box;
+	-webkit-box-flex: 1;
+}
+.tabBox li{
+	font-size: 14px;
+}
+.tabBox li .naviImg{
+	height: 14px;
+	width: 14px;
+	/*height: 50%;*/
+	padding-right: 0px;
+	vertical-align: middle;
+}
+.box {
+	background: url(../../images/employee/employeebg.png) repeat-y top center;
+	background-size: 100%;
+	background-attachment: fixed;
+	min-height: 100%;
+	height: auto;
+	width: 100%;
+	position: absolute;
+	display: inline-block;
+}
+
+#lifeIndex #viewList{
+	/*padding-bottom: 3.5rem;*/
+}
+
+#categoryList .listBox {
+	padding: 0 0;
+}
+#categoryList .listBox li {
+	line-height: 24px;
+	font-size: 14px;
+	padding: 1rem 0.1rem;
+	border-bottom: 0.1rem dashed #D4D4D4;
+	background: #f9f9f9;
+	background-size: 100%;
+}
+#categoryList .listBox .listBold {
+	float: right;
+	color: #999999;
+	font-size: 2.4rem;
+	font-weight:normal;
+}
+#articleList{
+	word-wrap:break-word;
+	padding:0 0.1rem;
+}
+#articleList .articleDesc{
+	font-family: 黑体;
+	font-size: 14px;
+	padding-top: 20px;
+	padding-bottom: 10px;
+	line-height: 2.3rem;
+}
+#articleList .articleTilte{
+	font-size: 16px;
+	color: #42dab5;
+	padding-top: 10px;
+}
+#articleList .articleContent{
+	font-family: 黑体;
+	font-size: 14px;
+	padding: 10px 0;
+	border-bottom: 0.1rem dashed #D4D4D4;
+	line-height: 2.3rem;
+}
+#articleList pre{
+	white-space: pre-wrap;
+	word-wrap: break-word;
+}

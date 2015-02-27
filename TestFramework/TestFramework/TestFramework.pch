@@ -1,0 +1,28 @@
+//
+//  Plugin.pch
+//  PluginApp
+//
+//  Created by wuyj on 15-1-13.
+//  Copyright (c) 2015年 baidu. All rights reserved.
+//
+
+#import <Availability.h>
+
+#ifndef __IPHONE_5_0
+#warning "This project uses features only available in iOS SDK 5.0 and later."
+#endif
+
+#ifdef __OBJC__
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import "NSString+Utility.h"
+#import "UIColor+Utility.h"
+#import "UIImage+Utility.h"
+#import "NSObject+Utility.h"
+#import "NSNumber+Utility.h"
+#import "NSData+Utility.h"
+#endif
+
+
+#define IsIOS7 ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
+#define navigationBarHeight (IsIOS7 ? 64 : 44)

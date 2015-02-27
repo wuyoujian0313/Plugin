@@ -1,0 +1,14 @@
+@charset "utf-8";
+/* CSS Document */
+/*menu*/
+#menu{visibility:hidden; height:5rem;position:fixed;background: #1cb5fb; width:100%;padding:0;margin:0;z-index:99;display:-webkit-box;}
+#menu a{height:5rem;background:#1cb5fb no-repeat center 0.5rem;font-size:1.2rem;text-align:center;color:#ffffff;text-decoration:none;font-weight:normal;text-shadow:none;cursor:pointer;-webkit-box-flex:1;display:block;}
+#menu a.hover{background-color:#00a3ee;}
+#menu a span{background:center center no-repeat;background-size:70% auto;width:4rem;height:2.8rem;display:inline-block;margin-top:0.4rem;}
+#menu .lookComment span{background-image:url(../images/bottomicon01.png);}
+#menu .writeComment span{background-image:url(../images/bottomicon02.png);background-position:center top;}
+#menu .somePraise span{background-image:url(../images/bottomicon03.png);}
+#menu .participation span{background-image:url(../images/bottomicon04.png);}
+#menu .phone span{background-image:url(../images/phoneicon.png);background-size:42% auto;}
+#menu em{width:100%;display:block;}
+

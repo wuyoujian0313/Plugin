@@ -1,0 +1,8 @@
+@charset "utf-8";
+/* CSS Document 
+**tab切换样式
+*/
+#tabTransfer{position:fixed; top:4.3rem; left:0; width:100%; font-size:1.6rem; border-bottom:0.1rem solid #03acfa; height:3.6rem;line-height: 3.6rem;background: #fff; z-index:100;padding:0;display:-webkit-box;color:#999999;}
+#tabTransfer li{text-align: center;text-shadow:none;cursor:pointer;position:relative;-webkit-box-flex: 1;}
+#tabTransfer li.current{color:#03acfa;}
+#tabTransfer li.current span{height:0;font-size:0; border:0.1rem solid #03acfa; position:absolute;bottom:0; left:0;display:inline-block;width:100%;}

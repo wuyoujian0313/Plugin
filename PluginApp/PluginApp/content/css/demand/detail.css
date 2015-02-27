@@ -1,0 +1,10 @@
+body{height:100%; overflow: hidden;}
+#wrapper{background:#ffffff;height:100%;}
+#detailList li{padding:0 0.8rem;}
+.demandTitle{color:#42DAB5;font-size:1.8rem;text-align:center;font-weight:normal;padding:1.5rem 0;overflow:hidden;line-height:24px;margin:0 0.9rem;border-bottom: 0.1rem dashed #D4D4D4;}
+.detailCount{border-bottom: 0.1rem dashed #D4D4D4;font-size:1.2rem;overflow:hidden;padding-bottom:0.5rem;}
+.detailCount span{background: url(../../images/lookicon.png) no-repeat left center;background-size:1.6rem;padding:0 0.5rem 0 1.8rem;float:right;color:#cccccc;display:block;}
+#detailList li div{line-height: 24px;font-size: 1.6rem;padding: 1.3rem 0.1rem;border-bottom: 0.1rem dashed #D4D4D4;}
+#detailList li:nth-child(2n-1){background: #f9f9f9;}
+#demandDetail .noComment{color:#999999;text-align:center;font-size:1.8rem;padding-top:50%}
+

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>度生活</title>
+    <meta name="description" content=""/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="viewport" content="width=device-width, maximum-scale=1.0, user-scalable=0, initial-scale=1.0"/>
+    <meta content="telephone=no" name="format-detection">
+    <link rel="stylesheet" href="../../lib/jqm/css/themes/default/jquery.mobile-1.3.2.min.css" type="text/css"/>    
+    <link rel="stylesheet" href="../../js/widgets/simpledialog/jquery.mobile.simpledialog.css" />
+    <link rel="stylesheet" href="../../js/widgets/refresh/refresh.css" type="text/css"/>
+    <link rel="stylesheet" href="../../css/common.css" type="text/css"/>
+    <script type="text/javascript" src="../../lib/jqm/js/jquery.js"></script>
+    <script>
+    $(document).bind("mobileinit", function(){
+         $.mobile.selectmenu.prototype.options.nativeMenu = false;
+    });
+    </script>
+    <script type="text/javascript" src="../../lib/jqm/js/jquery.mobile-1.3.2.min.js"></script>
+    <script type='text/javascript' src='../../lib/handlebars.js'></script>
+    <script type='text/javascript' src='../../lib/registerHelper.js'></script>
+    <script type="application/javascript" src="../../js/widgets/device.js"></script>
+    <script type="application/javascript" src="../../js/widgets/simpledialog/jquery.mobile.simpledialog.js"></script>
+    <script type="application/javascript" src="../../js/widgets/iscroll/iscroll.js"></script>
+    <script type='text/javascript' src='../../js/widgets/refresh/refresh.js'></script>
+    <script type="application/javascript" src="../../js/widgets/jquery.jsonp.js"></script>
+    <script type='text/javascript' src='../../js/config.js'></script>
+    <script type='text/javascript' src='../../js/common.js'></script>
+</head>
+<body id="body">
+<div data-role='page' id='publishPage'>
+	<link rel="stylesheet" href="../../css/register/index.css" />
+	<link rel="stylesheet" href="../../css/personal/publish.css" />
+	<header><a href="../../view/personal/index.html" id="backTo" data-ajax='false'></a>发布管理</header>
+    <!-- <div id="pullDown">
+        <span class="pullDownIcon"></span><span class="pullDownLabel">下拉刷新...</span>
+    </div> -->
+    <div class="mainBox" id="mainBox">
+    </div>
+    <div id="loadImg"><img src='../../images/loading1.gif' /></div>
+    <!-- <div id="pullUp">
+        <span class="pullUpIcon"></span><span class="pullUpLabel">...</span>
+    </div>  -->                                         
+	
+    <script id="tpl_messagePosts" type="text/x-handlebars-template">
+    {{#compare goodsList.data.length '>' 0}}
+        <div id="postBox">
+        {{#each goodsList.data}}
+    		<div class="situation">
+    		  {{#compare status '==' '草稿'}}
+                <div class="bot">
+                    <p class="information clearfix">{{title}}<span>{{dateFormat today pubDate 'YYYY-MM-DD HM' true}}</span></p>
+                </div>
+                <div class="resultTips"><a data-ajax='false' href='{{#compare articleType '==' 'HOUSE'}}../../view/house/createHouse.html{{else}}../../view/trade/createGoods.html{{/compare}}?editForm=true&articleid={{id}}' class="modify" data-id="{{id}}"><b>编辑</b></a><span class="cancle" data-id="{{id}}"><b>删除</b></span></div>
+                <div class="showSituation accept">
+                	<div><b></b>{{{status}}}</div>
+                </div>
+    		  {{/compare}}
+    		  {{#compare status '==' '已发布'}}
+    			<div class="bot">
+    				<p class="information clearfix">{{title}}<span>{{dateFormat today pubDate 'YYYY-MM-DD HM' true}}</span></p>
+    				<div class="changeStatus" data-id="{{id}}" data-articleId="{{articleId}}"><span class="left">&raquo;</span><span class="right">右滑标记为已出</span></div>
+    				<div class="overStatus dis" data-id="{{id}}" data-articleId="{{articleId}}"><span class="right">左滑标记为已发布</span><span class="left">&laquo;</span></div>
+    			</div>
+    			<div class="resultTips"><a data-ajax='false' href='{{#compare articleType '==' 'HOUSE'}}../../view/house/createHouse.html{{else}}../../view/trade/createGoods.html{{/compare}}?editForm=true&articleid={{id}}' data-href='{{#compare articleType '==' 'HOUSE'}}../../view/house/createHouse.html{{else}}../../view/trade/createGoods.html{{/compare}}?editForm=true&articleid={{id}}' class="modify" data-id="{{id}}"><b>编辑</b></a><span class="cancle" data-id="{{id}}"><b>删除</b></span></div>
+    			<div class="showSituation success">
+    				<div><b></b>{{{status}}}</div>
+    			</div>
+    		  {{/compare}}
+    		  {{#compare status '==' '已出'}}
+    			<div class="bot">
+    				<p class="information clearfix">{{title}}<span>{{dateFormat today pubDate 'YYYY-MM-DD HM' true}}</span></p>
+    				<div class="changeStatus dis" data-id="{{id}}" data-articleId="{{articleId}}"><span class="left">&raquo;</span><span class="right">右滑标记为已出</span></div>
+                    <div class="overStatus" data-id="{{id}}" data-articleId="{{articleId}}"><span class="right">左滑标记为已发布</span><span class="left">&laquo;</span></div>
+                </div>
+    			<div class="resultTips"><a data-ajax='false' data-href='{{#compare articleType '==' 'HOUSE'}}../../view/house/createHouse.html{{else}}../../view/trade/createGoods.html{{/compare}}?editForm=true&articleid={{id}}' class="modify" data-id="{{id}}"><b class="modis">编辑</b></a><span class="cancle" data-id="{{id}}"><b>删除</b></span></div>
+                <div class="showSituation sendBack">
+                	<div><b></b>{{{status}}}</div>
+                </div>
+    		  {{/compare}}
+    		  {{#compare status '==' '待审核'}}
+               <div class="bot">
+    			 <p class="information clearfix pb5">{{title}}<span>{{dateFormat today pubDate 'YYYY-MM-DD HM' true}}</span></p>
+               </div>
+               <div class="resultTips"><a data-ajax='false' href='{{#compare articleType '==' 'HOUSE'}}../../view/house/createHouse.html{{else}}../../view/trade/createGoods.html{{/compare}}?editForm=true&articleid={{id}}' class="modify" data-id="{{id}}"><b>编辑</b></a><span class="cancle" data-id="{{id}}"><b>删除</b></span></div>        
+    			<div class="showSituation waitAccept">
+    				<div><b></b>{{{status}}}</div>
+    			</div>
+    		  {{/compare}}
+              {{#compare status '==' '未通过'}}
+                <div class="bot">
+                    <p class="information clearfix">{{title}}<span>{{dateFormat today pubDate 'YYYY-MM-DD HM' true}}</span></p>
+                </div>
+                <div class="resultTips"><a data-ajax='false' href='{{#compare articleType '==' 'HOUSE'}}../../view/house/createHouse.html{{else}}../../view/trade/createGoods.html{{/compare}}?editForm=true&articleid={{id}}' class="modify" data-id="{{id}}"><b>编辑</b></a><span class="cancle" data-id="{{id}}"><b>删除</b></span></div>
+                <div class="showSituation faild">
+                    <div><b></b>{{{status}}}</div>
+                </div>
+              {{/compare}}            
+              {{#compare status '==' '新建'}}
+                <div class="bot">
+                    <p class="information clearfix">{{title}}<span>{{dateFormat today pubDate 'YYYY-MM-DD HM' true}}</span></p>
+                </div>
+                <div class="resultTips"><a data-ajax='false' href='{{#compare articleType '==' 'HOUSE'}}../../view/house/createHouse.html{{else}}../../view/trade/createGoods.html{{/compare}}?editForm=true&articleid={{id}}' class="modify" data-id="{{id}}"><b>编辑</b></a><span class="cancle" data-id="{{id}}"><b>删除</b></span></div>
+                <div class="showSituation faild">
+                    <div><b></b>被驳回</div>
+                </div>
+              {{/compare}}
+    		</div>
+    	 {{/each}}
+    	 </div>
+    {{else}}
+        <p class='noPublish'>暂无发布</p>
+    {{/compare}}
+	</script>
+	<script type='text/javascript' src='../../js/personal/publish.js'></script> 
+    <script type='text/javascript'>
+    if(window.is40){
+        // JavaScript Document
+         ;(function($,window){
+            //validSession('../../login.html');
+//window.updateTokenFn();
+
+            window.$mainBox = $('#mainBox');
+            var publishScroll;
+            //当前分页初始化
+            window.pageNum = 1;
+            window.loadDataPub = function(options){
+                var options = options || {};
+                var dataHandle = options.dataHandle || function(data){$mainBox.html(data)};
+                var cb = options.cb || function(){};
+                $.jsonp({
+                    url: window.duLife.URLS.managePosts,
+                    callbackParameter: 'callback',
+                    timeout:5000,
+                    data: {
+                        pageSize:1000
+                    },
+                    beforeSend: function(){
+                        // validSession('../../login.html',this);
+                    },
+                    success: function(data){
+                        $.mobile.activePage.find('#loadImg').css('display','none');
+                        var src_messagePosts = $('#tpl_messagePosts').html();
+                        var tpl_messagePosts = Handlebars.compile(src_messagePosts);
+                        dataHandle(tpl_messagePosts(data));
+                        setTimeout(function(){
+                            $('#mainBox').css('height',Math.min(parseInt($(window).height()),parseInt(window.screen.height)) - window.statusHeight - parseInt($('header').height()));
+                            publishScroll = new iScroll('mainBox');
+                        },500);
+                        cb && cb();
+                    },
+                    error: function(args){
+                        $.duLife.fns.tips("加载数据错误~");
+                        cb && cb();
+                        return false;
+                    }
+                });
+            };
+            //关闭发布
+            $('#publishPage').delegate('.changeStatus','swiperight',function(){
+                var _this=$(this);
+                var pubId=_this.attr('data-id');
+                var pubarticleId=_this.attr('data-articleId');
+                var json={
+                           id:pubId,
+                    articleId:pubarticleId
+                };
+                var url=window.duLife.URLS.closeGoods;
+                $.jsonp({
+                    type:'GET',
+                    url: url,
+                    callbackParameter: 'callback',
+                    data: json,
+                    timeout:5000,
+                    beforeSend: function(){
+                        //validSession('../../login.html',this);
+                    },
+                    success: function(data){
+                       $.duLife.fns.tips(data.message);
+                       _this.addClass('dis');
+                       var par=_this.parents('.situation');
+                       par.find('.overStatus').removeClass('dis');
+                       par.find('.showSituation').removeClass('success').addClass('sendBack').html('<div><b></b>已出</div>');
+                       par.find('.modify').removeAttr('href');
+                       par.find('.modify b').addClass('modis');
+                    },
+                    error: function(args){
+                        $.duLife.fns.tips("加载数据错误~");
+                        return false;
+                    }
+                });
+            });
+            //开启发布
+            $('#publishPage').delegate('.overStatus','swipeleft',function(){
+                var _this=$(this);
+                var pubId=_this.attr('data-id');
+                var pubarticleId=_this.attr('data-articleId');
+                var json={
+                           id:pubId,
+                    articleId:pubarticleId
+                };
+                var url=window.duLife.URLS.openGoods;
+                $.jsonp({
+                    type:'GET',
+                    url: url,
+                    callbackParameter: 'callback',
+                    timeout:5000,
+                    data: json,
+                    beforeSend: function(){
+                        //validSession('../../login.html',this);
+                    },
+                    success: function(data){
+                       $.duLife.fns.tips(data.message);
+                       var par=_this.parents('.situation');
+                       var hrefValue=par.find('.modify').attr('data-href');
+                       _this.addClass('dis');
+                       par.find('.changeStatus').removeClass('dis');
+                       par.find('.showSituation').removeClass('sendBack').addClass('success').html('<div><b></b>已发布</div>');
+                       par.find('.modify').attr('href',hrefValue);
+                       par.find('.modify b').removeClass('modis');
+
+                    },
+                    error: function(args){
+                        $.duLife.fns.tips("加载数据错误~");
+                        return false;
+                    }
+                });
+                    
+            });
+            //删除
+            $('#publishPage').delegate('.resultTips .cancle','click',function(){
+                var _this=$(this);
+                $('#publishPage .cancle').removeClass('current');
+                _this.addClass('current');
+                $.duLife.fns.confirm('确定要删除？',function(){
+                var url=window.duLife.URLS.delGoods;
+                $.jsonp({
+                    type:'GET',
+                    url: url,
+                    callbackParameter: 'callback',
+                    timeout:5000,
+                    data: {
+                        articleId:$('#publishPage .cancle.current').data('id')
+                    },
+                    beforeSend: function(){
+                        //validSession('../../login.html',this);
+                    },
+                    success: function(data){
+                      if(data.success)
+                      {
+                        $.duLife.fns.tips(data.message);
+                        $('#publishPage .cancle.current').closest('.situation').remove();
+                      }
+                      else
+                      {
+                        $.duLife.fns.tips(data.message);
+                      }
+                    },
+                    error: function(args){
+                        $.duLife.fns.tips("加载数据错误~");
+                        return false;
+                    }
+                 });
+                });
+            });
+            $('#publishPage').on('pagebeforeshow',function(){
+                loadDataPub();
+            });
+        })(jQuery,window);
+
+    }
+    </script>   
+</div>
+</body>
+</html>

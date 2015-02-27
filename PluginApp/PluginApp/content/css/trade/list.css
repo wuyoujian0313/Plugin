@@ -1,0 +1,21 @@
+#houseList #wrapper,#tradeList #wrapper{top:7.5rem;}
+#statistics{
+	height:3rem; line-height: 3rem; font-size:1.4rem; border-bottom:1px solid #ececec; padding:0 0.5rem; color:#999;position:relative;z-index:10;top:4.4rem;
+}
+#statistics em{
+	color:#48b0ed; font-style:normal; 
+}
+#statistics span:first-child{
+	margin-right:1rem;
+}
+#statistics span:last-child{
+	float: right;
+}
+#mainWrapper{
+	width:100%;
+}
+#scroller{padding:0 0.8rem; }
+.articleItem .articleInfo p{margin-top:0.5rem;}
+.articleItem .articleInfo p:last-child span:last-child{
+	float:right; color:#ff5500;background:none;
+}

@@ -1,0 +1,10 @@
+@charset "utf-8";
+/* CSS Document */
+body{overflow-x:hidden;}
+#mainWrapper{padding:0 0.5rem;}
+.privilegeInfor{border-bottom:0.1rem solid #ececec;padding:0.8rem 0;display:-webkit-box;}
+.privilegeInfor .inforLeft{width:125px;margin-right:0.5rem;height:94px;overflow:hidden;}
+.privilegeInfor .inforLeft img{width:125px;height:94px;}
+.privilegeInfor .inforRight{color:#999999;line-height:1.8rem;-webkit-box-flex:1;display: -webkit-box;-webkit-box-orient: vertical;width:100%;}
+.privilegeInfor .inforRight li{word-break: break-all;word-wrap: break-word;font-size:1.2rem;}
+.privilegeInfor .inforRight .title{color:#000; font-size:1.6rem;overflow : hidden;text-overflow: ellipsis;text-align: left;margin-bottom:0.3rem;line-height:1.8rem;}

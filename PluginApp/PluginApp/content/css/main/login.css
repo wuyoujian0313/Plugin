@@ -1,0 +1,52 @@
+*{ 
+    margin:0; padding:0;
+}
+
+html{
+    font-size:62.5%; -webkit-text-size-adjust:none; height:100%; 
+}
+#body{ 
+    height:100%;
+}
+.main{ 
+     text-align:center;
+     background:url(../../images/login/back.jpg) #fd9c96;
+     background-attachment: fixed;
+}
+#div1 div{ 
+    border:1px solid #000;
+}
+.mian .header,.main .footer{ 
+    height:50px; line-height:50px;
+}
+input:focus {
+    outline: none;
+}
+body#loginbody{
+    background:none;
+}
+/*#login{background:none;}*/
+#login{
+    background:#fd9c96;
+    background-size:100% 100%;
+    background-repeat:no-repeat;
+    height:100%;
+}
+.main img{
+    width:38%;
+    margin:2.8rem 0 0;
+    
+}
+
+.loginForm{margin-top:1rem;}
+.loginForm div{width:80%;background:rgba(255,251,240,0.25) no-repeat 0.5rem center;background-size:auto 2.4rem;height:3rem;line-heigfht:3rem;padding:0.6rem;margin:0 auto;display: -webkit-box;border:0.1rem solid #ffffff;}
+.loginForm div input{display: -webkit-box;-webkit-box-flex: 1;width: 100%;font-size:1.6rem;border:0;height:2.4rem;line-height:2.4rem;padding:0.3rem 0;background:none;outline: none;color: #ffffff;}
+.loginForm div label{display:inline-block;background:no-repeat;width:3rem;height:2.4rem;background-size:auto 95%;opacity:0.6;}
+.loginForm .userBox{border-bottom: none; border-top-left-radius: 0.3rem;
+border-top-right-radius: 0.3rem;background-image: url(../../images/login/home2.png);}
+.loginForm .pwdBox{ border-bottom-left-radius: 0.3rem;border-bottom-right-radius: 0.3rem;background-image:url(../../images/login/home3.png);background-position:0.4rem center;}
+.loginForm #submit{width:80%;background:rgba(255,255,255,0.8);border:0;height:3rem;padding:0.6rem;margin:0 auto 0;line-height:3rem;border-radius:0.3rem;margin-top:2rem;}
+.loginForm p input{border:none;background:none;color:#fd8551;font-size:2rem;line-height:3rem;}
+#user::-webkit-input-placeholder,#pwd::-webkit-input-placeholder{color:#fff;opacity:0.8;}
+#error{width:80%;margin:0 auto;width:80%;border:0;height:2.4rem; line-height:2.4rem;color: #000000;}
+#error label{margin: 0 auto;text-align:center;display: inline-block;color:rgb(167,49,44);}

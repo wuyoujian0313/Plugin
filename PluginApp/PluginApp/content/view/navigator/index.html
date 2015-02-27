@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <title>度生活</title>
+      <meta charset="utf-8"/>
+      <meta name="description" content=""/>
+      <meta name="apple-mobile-web-app-capable" content="yes"/>
+      <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+      <meta name="viewport" content="width=device-width, maximum-scale=1.0, user-scalable=0, initial-scale=1.0"/>
+      <meta content="telephone=no" name="format-detection"> 
+      <link type="text/css" rel="stylesheet" media="all" href="../../css/navigator/index.css"/>
+      <script>
+        window.getUserName = function(name)
+        {
+            localStorage.setItem('currentUser',name);
+        };        
+        function onLoginSuccess(){
+            location.href='../../index.html';
+        };
+      </script>
+  </head>
+  <body>
+    <div id="navigatorWrapper">
+      <section class="intro-one">
+        <img class="intro-one-bg" src="../../images/navigator/1.0.png"/>
+        <img class="intro-one-person" src="../../images/navigator/1.1.png"/>
+        <img class="intro-one-title" src="../../images/navigator/1.3.png"/>
+        <img class="intro-one-bubble" src="../../images/navigator/1.2.png"/>
+      </section>
+      <section class="intro-two">
+          <img class="intro-two-and-three-bg" src="../../images/navigator/2.0.png"/>
+          <img class="intro-two-person" src="../../images/navigator/2.1.png"/>
+          <img class="intro-two-bubble" src="../../images/navigator/2.2.png"/>
+          <img class="intro-two-title" src="../../images/navigator/2.3.png"/>
+      </section>
+      <section class="intro-three">
+          <img class="intro-two-and-three-bg" src="../../images/navigator/2.0.png"/>
+          <img class="intro-three-title" src="../../images/navigator/3.3.png"/>
+          <img class="intro-three-bubble" src="../../images/navigator/3.2.png"/>
+          <img class="intro-three-person" src="../../images/navigator/3.1.png"/>
+          <div id="right-now" href="javascript:;"><em>马上体验</em></div>
+      </section>
+    </div>
+    <script src="../../js/navigator/main.js"></script>
+    <script>
+    window.onload=function()
+    {
+        location.href = 'life://api/setWindowMode?fullScreen=true';
+        var obj=document.getElementById('right-now');
+        var oBox=document.getElementById('navigatorWrapper');
+        obj.addEventListener('touchstart', function(evt)
+        {
+            evt.preventDefault();
+            obj.style.background='rgba(59,68,96,0.8)';
+
+        });
+        obj.addEventListener('touchend', function(evt)
+        {
+            evt.preventDefault();
+            oBox.innerHTML=''
+            location.href='life://api/tryLogin';
+        });
+      }
+    </script>
+  </body>
+</html>

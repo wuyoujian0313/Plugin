@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<body id="body">
+<div data-role='page' id='tradeList'>
+	<link rel="stylesheet" href="../../css/trade/list.css" />
+	<link rel="stylesheet" href="../../js/widgets/refresh/refresh.css" type="text/css"/>
+	<script type="application/javascript" src="../../js/widgets/iscroll/iscroll.js"></script>
+	<script type='text/javascript' src='../../js/widgets/refresh/refresh.js'></script>
+	<header><a id='backTo' href='#' data-rel='back'></a>跳蚤街<span class='createPost'>发帖</span></header>
+	<div id='wrapper'>
+		<p id='statistics'>
+			<!--tpl_statistics-->
+		</p>
+		<div id='mainWrapper'>
+			<div id='scroller' style='float:left;'>
+				<div id="pullDown">
+					<span class="pullDownIcon"></span><span class="pullDownLabel">下拉刷新...</span>
+				</div>
+				<div id="viewList">
+				<!--tpl_articlelist-->
+				</div>
+				<div id="pullUp">
+					<span class="pullUpIcon"></span><span class="pullUpLabel">...</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script id="tpl_statistics" type="text/x-handlebars-template">
+				<span><em>{{goodsList.totalCount}}</em>话题</span>
+				<span><em>234<!-- {{click}} --></em>人访问</span>
+				<span>今日<em>2<!-- {{today}} --></em></span>
+			</script>
+	<script id="tpl_goodslist" type="text/x-handlebars-template">
+    {{#each goodsList.data}}
+	<div class='articleItem' articleid='{{this.id}}'>
+		{{#if this.imgSrc }}
+		<div class="thumbnail"><img src='../../images/test/pic02.png' /></div>
+		{{/if}}
+		<div class="articleInfo{{#unless this.imgSrc}} nothumbnail{{/unless}}">
+			<h5>{{this.title}}</h5>
+			<p><span>{{dateFormat this.pubDate 'YYYY-MM-DD HM' false}}</span><span>{{this.price}}元/月</span></p>
+		</div>
+	</div>
+    {{/each}}
+    </script>
+	<script type='text/javascript' src='../../js/trade/list.js'></script>
+</div>
+</body>
+</html>

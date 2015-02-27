@@ -1,0 +1,26 @@
+@charset "utf-8";
+body{
+	height:100%; overflow: hidden;
+}
+/* CSS Document */
+b{font-weight:normal;}
+em{font-style:normal;}
+.tal{text-align:left;}
+.tac{text-align:center;}
+.tar{text-align:right;}
+#wrap{padding-bottom:5rem;}
+.mainBox{padding:0 0.8rem 0; }
+.title{font-size:1.8rem;font-weight:normal;text-align:center;line-height:2rem;padding:1.5rem 0 1rem;word-break: break-all;}
+.aboutTitle,.aboutTitle1{color:#999999;font-size:1.2rem;height:auto;display:block;}
+.aboutTitle span,.aboutTitle1 span{display:inline-block;float:left;}
+.aboutTitle1 span{width:50%;}
+.aboutTitle .tal{width:26%;}
+.aboutTitle .tar{width:20%;}
+.aboutTitle .tac{width:54%;}
+.aboutTitle .tac b{background: url(../../images/time.png) no-repeat left top;background-size:1.25rem;padding-left:1.6rem;color:#f86666;display:inline-block;}
+.aboutTitle .tar b,.aboutTitle1 .tar b{background: url(../../images/lookicon.png) no-repeat left center;background-size:1.6rem;padding-left:2rem;}
+#lifeDetail .content{padding:1rem 0;font-size:1.4rem;line-height:2.4rem;color:#333333;}
+.contentText p{word-break:break-all;word-wrap:break-word;}
+#mainView{
+	position:fixed; top:4.4rem;width:100%;
+}

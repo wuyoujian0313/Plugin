@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>度生活</title>
+    <meta name="description" content=""/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="viewport" content="width=device-width, maximum-scale=1.0, user-scalable=0, initial-scale=1.0"/>
+    <meta content="telephone=no" name="format-detection">
+    <link rel="stylesheet" href="../../lib/jqm/css/themes/default/jquery.mobile-1.3.2.min.css" type="text/css"/>    
+    <link rel="stylesheet" href="../../js/widgets/simpledialog/jquery.mobile.simpledialog.css" />
+    <link rel="stylesheet" href="../../js/widgets/refresh/refresh.css" type="text/css"/>
+    <link rel="stylesheet" href="../../css/common.css" type="text/css"/>
+    <script type="text/javascript" src="../../lib/jqm/js/jquery.js"></script>
+    <script>
+    $(document).bind("mobileinit", function(){
+         $.mobile.selectmenu.prototype.options.nativeMenu = false;
+    });
+    </script>
+    <script type="text/javascript" src="../../lib/jqm/js/jquery.mobile-1.3.2.min.js"></script>
+    <script type='text/javascript' src='../../lib/handlebars.js'></script>
+    <script type='text/javascript' src='../../lib/registerHelper.js'></script>
+    <script type='text/javascript' src='../../js/widgets/device.js'></script>
+    <script type="application/javascript" src="../../js/widgets/simpledialog/jquery.mobile.simpledialog.js"></script>
+    <script type="application/javascript" src="../../js/widgets/iscroll/iscroll.js"></script>
+    <script type='text/javascript' src='../../js/widgets/refresh/refresh.js'></script>
+    <script type='text/javascript' src='../../js/widgets/iscroll/iKeyboardScroll.js'></script>
+    <script type="application/javascript" src="../../js/widgets/jquery.jsonp.js"></script>
+    <script type='text/javascript' src='../../js/config.js'></script>
+    <script type='text/javascript' src='../../js/common.js'></script>
+</head>
+<body id="body">
+<div data-role='page' id='register' data-dom-cache='true'>
+    <link rel="stylesheet" href="../../js/widgets/mobipick/mobipick.css" />
+	<link rel="stylesheet" href="../../css/register/register.css" />
+    <script type='text/javascript' src='../../js/widgets/mobipick/xdate.js'></script>
+    <script type='text/javascript' src='../../js/widgets/mobipick/mobipick.js'></script>
+	<header><a id='backTo' href='javascript:;' data-rel='back'></a>我要预约</header>
+    <div id="mainWrapper">
+        <div>
+            <form action="" id='registerForm'>
+                <div class="legend" id='selectPerson'>
+                    <a class='select' href="#familyList">选择就诊人</a>
+                    <ul>
+                        
+                    </ul>
+                </div>
+                <div class="legend">
+                    <label for='tel'>联系电话</label><input id='tel' type="text" name="tel" value='' placeholder='请务必填写在京电话' maxlength='12' required/>
+                </div>
+                <div class="legend" id='registerTimeLegend'>
+                    <label for="registerTime">预约时间</label><input class="min-date" type="text" placeholder='最早时间' name='applyBegin' required/><br />
+                    <label>至</label><input class="max-date" type="text" placeholder='最晚时间' name='applyEnd' required/>
+                </div>
+                <div class="legend" id='hospital'>
+                    <label for="hospitalId">医院</label><select name="hospitalId" id="hospitalId" required></select>
+                </div>
+                <div class="legend">
+                    <label for="department">科室</label><input type="text" name="department" id="department" value='' placeholder='如“心内科”' required />
+                </div>
+                <div class="legend" id='type'>
+                    <fieldset data-role="controlgroup"data-type="horizontal">
+                        <legend>号种</legend>
+                        <input type="radio" name="type" value="EXPERT" id='specialist' required/>
+                        <label for="specialist">专家</label>
+                        <input type="radio" name="type" value="NORMAL" id='general' checked="checked" required/>
+                        <label for="general">普通</label>
+                    </fieldset>
+                    <p>提示：专家号较少，请依照实际病情选择</p>
+                </div>
+                <div class="legend">
+                    <label for="remark">备注</label><textarea name="remark" id="remark" placeholder='输入文字...'></textarea>
+                </div>
+                <div class="legend">
+                    <span id='submitBtn'>提交</span>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script id="tpl_selected" type="text/x-handlebars-template">
+		<input type="hidden" name="patientId" value="{{id}}">
+        <li>
+            <label>姓名</label><span>{{name}}</span><input type="hidden" name="patientName" value='{{name}}' required/>
+        </li>
+        <li>
+            <label>关系</label><span>{{relation}}</span><input type="hidden" name="patientRelation" value='{{relation}}' required/>
+        </li>
+        <li>
+            <label>身份证</label><span>{{idCard}}</span><input type="hidden" name="idCard" value='{{idCard}}' required/>
+        </li>
+    </script>
+    <script id="tpl_hospital" type="text/x-handlebars-template">
+        <option value=''>点击选择</option>
+        {{#each hospitals}}
+        <option socialCard='{{this.socialCard}}' medicalCard='{{this.medicalCard}}' value='{{this.id}}' {{#if this.selected}}selected{{/if}}>{{this.name}}</option>
+        {{/each}}
+    </script>
+    <script id="tpl_editResterForm" type="text/x-handlebars-template">
+        <input type='hidden' name='id' value='{{id}}'>
+        <input type='hidden' name='version' value='{{version}}'>
+        <div class="legend" id='selectPerson'>
+            <a class='select' href="#familyList">选择就诊人</a>
+            <ul>
+                <li>
+                    <input type='hidden' name='patientId' value='{{patientId}}'/>
+                    <label>姓名</label><span>{{patientName}}</span><input type="hidden" name="patientName" value='{{patientName}}' required/>
+                </li>
+                <li>
+                    <label>关系</label><span>{{patientRelation}}</span><input type="hidden" name="patientRelation" value='{{patientRelation}}' required/>
+                </li>
+                <li>
+                    <label>身份证</label><span>{{medicalCardNumber}}</span><input type="hidden" name="idCard" value='{{medicalCardNumber}}' maxlength='18' required/>
+                </li>
+        </ul>
+        </div>
+        <div class="legend">
+            <label for='tel'>联系电话</label><input id='tel' type="text" name="tel" value='{{tel}}' placeholder='请务必填写在京电话' maxlength='12' required/>
+        </div>
+        <div class="legend" id='registerTimeLegend'>
+            <label for="registerTime">预约时间</label><input class="min-date" type="text" placeholder='最早时间' value='{{dateFormat today appointmentBeginL 'YYYY-MM-DD' 'never'}}' name='applyBegin' required/><br />
+            <label>至</label><input class="max-date" type="text" placeholder='最晚时间' name='applyEnd' value='{{dateFormat today appointmentEndL 'YYYY-MM-DD' 'never'}}' required/>
+        </div>
+        <div class="legend" id='hospital'>
+            <label for="hospitalId">医院</label><select name="hospitalId" id="hospitalId" required>
+                
+            </select>
+        </div>
+        <div class="legend">
+            <label for="department">科室</label><input type="text" name="department" id="department" value='{{department}}' required />
+        </div>
+        <div class="legend" id='type'>
+            <fieldset data-role="controlgroup"data-type="horizontal">
+                <legend>号种</legend>
+                <input type="radio" name="type" value="EXPERT" id='specialist' {{#compare type '==' '专家'}}checked="checked"{{/compare}} required>
+                <label for="specialist">专家</label>
+             
+                <input type="radio" name="type" value="NORMAL" id='general' {{#compare type '==' '普通'}}checked="checked"{{/compare}} required>
+                <label for="general">普通</label>
+            </fieldset>
+            <p>提示：专家号较少，请依照实际病情选择</p>
+        </div>
+        <div class="legend">
+            <label for="remark">备注</label><textarea name="remark" id="remark" {{#if remark}}{{else}}placeholder='输入文字(选填)...'{{/if}} cols="30" rows="10">{{#if remark}}{{remark}}{{/if}}</textarea>
+        </div>
+        <div class="legend">
+            <span id='submitBtn'>提交</span>
+        </div>
+    </script>
+</div>
+<div data-role='page' id='familyList' data-dom-cache='true'>
+    <header><a id='backTo' href='javascript:;' data-rel='back'></a>选择就诊人</header>
+    <div id="mainWrapper">
+        <div>
+            <ul class="listBox" id='listBox'></ul>
+        </div>
+    </div>  
+    <p id="addBtn"><span>添加家属</span></p>
+    <script id="tpl_familyList" type="text/x-handlebars-template">
+        {{#each patients}}
+        <li data-info='{{jsonStringify this}}'><em class='relationName'>{{name}}</em><span id='editPerson'>编辑</span><span id='delPerson'>删除</span></li>
+        {{/each}}
+    </script> 
+</div>
+<div data-role='page' id='addPerson'>
+    <header><a id='backTo' href='#familyList'></a>家属管理</header>
+    <form action="" id='addPersonForm'>
+        <div class="legend">
+            <label for="name">姓名</label><input type="text" name='patientName' id='name' value='' placeholder='如“张三丰”' required/>
+        </div>
+        <div class="legend">
+            <label for="ralation">关系</label><input type="text" name='patientRalation' id='ralation' value='' placeholder='如“母亲”' required/>
+        </div>
+        <div class="legend">
+            <label for="card">身份证</label><input type="text" name='idCard' id='card' value='' placeholder='18位数字或字母' maxlength="18" required/>
+        </div>
+        <div class="legend">
+            <span id='cancelBtn'>取消</span>
+            <span id='submitBtn'>保存</span>
+        </div>
+    </form>
+</div>
+<div data-role='page' id='editPerson'>
+    <header><a id='backTo' href='#familyList'></a>家属管理</header>
+    <form action="" id='addPersonForm'>
+         
+    </form>
+    <script id="tpl_editPerson" type="text/x-handlebars-template">
+        <div class="legend">
+            <label for="name">姓名</label><input type="text" name='patientName' id='name' value='{{name}}' required/>
+        </div>
+        <div class="legend">
+            <label for="ralation">关系</label><input type="text" name='patientRalation' id='ralation' value='{{relation}}' required/>
+        </div>
+        <div class="legend">
+            <label for="card">身份证</label><input type="text" name='idCard' id='card' value='{{idCard}}' required/>
+        </div>
+        <input type="hidden" name='id' value='{{id}}'/>
+        <div class="legend">
+            <span id='cancelBtn'>取消</span>
+            <span id='submitBtn'>保存</span>
+        </div>
+    </script>
+</div>
+<div data-role='page' id='viewPerson'>
+    <header><a id='backTo' href='javascript:;' data-rel='back'></a>家属管理</header>
+    <div id="mainWrapper">
+        
+    </div>
+    <script id="tpl_viewPerson" type="text/x-handlebars-template">
+        <div class="legend">
+            <label for="name">姓名</label><span>{{name}}</span>
+        </div>
+        <div class="legend">
+            <label for="ralation">关系</label><span>{{patientRelation}}</span>
+        </div>
+        <div class="legend">
+            <label for="card">身份证</label><span>{{idCard}}</span>
+        </div>
+    </script>
+    <script src='../../js/register/register.js'></script>
+</div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+#detailIndex #mainView{
+	position:relative; 
+	top:4.4rem;
+}
+.box {
+	background: url(../../images/employee/employeebg.png) repeat-y top center;
+	background-size: 100%;
+	background-attachment: fixed;
+	min-height: 100%;
+	height: auto;
+	width: 100%;
+	position: absolute;
+	display: inline-block;
+}
+
+#detailIndex #articleList .wordBreak {
+	padding: 0 0.8rem;
+}
+#detailIndex #articleList .wordBreak pre{
+	white-space: pre-wrap;
+	word-wrap: break-word;
+}
+.articleContent{line-height: 2.3rem;}
+#detailIndex #articleList .articleDesc{
+	font-family: 黑体;
+	font-size: 14px;
+	padding-top: 20px;
+	padding-bottom: 10px;
+}
+#detailIndex #articleList .articleTilte{
+	font-size: 16px;
+	color: #42DAB5;
+	padding-top: 10px;
+}
+#detailIndex #articleList .articleContent{
+	font-family: 黑体;
+	font-size: 14px;
+	padding: 10px 0;
+	border-bottom: 0.1rem dashed #D4D4D4;
+}

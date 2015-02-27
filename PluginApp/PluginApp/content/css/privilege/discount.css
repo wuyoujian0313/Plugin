@@ -1,0 +1,16 @@
+@charset "utf-8";
+/* CSS Document */
+body{overflow-x:hidden;}
+.container{margin:0 auto;position:relative;top:6.1rem;overflow:hidden;}
+#left,#right{width:47%;}
+#left{float: left;margin-left: 0.5rem;}
+#right{float: right;margin-right: 0.5rem;}
+
+.container .imgShow{border:1px solid #ececec;padding:0.1rem;width:88%;display:inline-block;margin-bottom: 0.5rem;}
+.imgShow h2{font-size:1.4rem;line-height:2rem;height:4rem;text-overflow:ellipsis;overflow:hidden;}
+.imgShow .aboutInfo span{width:50%;display:inline-block;line-height:2rem;font-size:1.4rem;color:#999999;}
+.imgShow .aboutInfo .tar{text-align:right;color:#ff6fa6;}
+
+.ui-mobile, .ui-mobile body{
+	overflow: hidden;
+}

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>度生活</title>
+    <meta name="description" content=""/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="viewport" content="width=device-width, maximum-scale=1.0, user-scalable=0, initial-scale=1.0"/>
+    <!-- <meta name="viewport" content="maximum-scale=0.5,minimum-scale=0.5, user-scalable=no, initial-scale=0.5, target-densitydpi=high-dpi"/> -->
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta content="telephone=no" name="format-detection">
+    <link rel="stylesheet" href="../../lib/jqm/css/themes/default/jquery.mobile-1.3.2.min.css" type="text/css"/>    
+    <link rel="stylesheet" href="../../js/widgets/simpledialog/jquery.mobile.simpledialog.css" />
+    <link rel="stylesheet" href="../../js/widgets/refresh/refresh.css" type="text/css"/>
+    <link rel="stylesheet" href="../../css/common.css" type="text/css"/>
+    <script type="text/javascript" src="../../lib/jqm/js/jquery.js"></script>
+    <script>
+    $(document).bind("mobileinit", function(){
+         $.mobile.selectmenu.prototype.options.nativeMenu = false;
+    });
+    </script>
+    <script type="text/javascript" src="../../lib/jqm/js/jquery.mobile-1.3.2.min.js"></script>
+    <script type='text/javascript' src='../../lib/handlebars.js'></script>
+    <script type='text/javascript' src='../../lib/registerHelper.js'></script>
+    <script type="application/javascript" src="../../js/widgets/device.js"></script>
+    <script type="application/javascript" src="../../js/widgets/simpledialog/jquery.mobile.simpledialog.js"></script>
+    <script type="application/javascript" src="../../js/widgets/iscroll/iscroll.js"></script>
+    <script type='text/javascript' src='../../js/widgets/refresh/refresh.js'></script>
+    <script type="application/javascript" src="../../js/widgets/jquery.jsonp.js"></script>
+    <script type='text/javascript' src='../../js/config.js'></script>
+    <script type='text/javascript' src='../../js/common.js'></script>
+</head>
+<body>
+<div data-role="page" id="askQet">
+    <link rel="stylesheet" href="../../css/life/life_comment.css" />
+    <div id="wrap">
+        <header><a href="javascript:;" id='backTo'  data-rel='back'></a></header>
+        <div class="mainBox">
+            <form action="" method="post" id='lifeCommentForm'>
+                <textarea name="" id="textareaBox" placeholder='请详细描述您的提问...'></textarea>
+                <input type="button" id="subBtn" value="提&nbsp;交" />
+            </form>
+        </div>
+    </div>
+    <script type="text/javascript" src="../../js/asking/askingQuestion.js"></script>
+    <script type="text/javascript">
+    if(window.is40)
+    {
+        ;(function($){
+            $('#textareaBox').textLimit(300);
+            $('#subBtn').on('click',function(){
+                if($(this).hasClass('disable'))
+                {
+                    return;
+                }
+                var val = $.trim($('#textareaBox').val());
+                var str =$.mobile.activePage.attr('data-url');
+                var paramData = $.duLife.fns.getUrlParam({str:str});
+                var categoryID=paramData.categoryID;
+                var categoryName= paramData.categoryName;
+                var newCreat = paramData.newCreat || '';
+                var topicID= paramData.topicID || '';
+                var againAsk = paramData.againAsk || '';
+                var id = paramData.id || '';
+                $(this).addClass('disable');
+                setTimeout(function(){
+                    if(val){
+                        if(id)
+                        {
+                            var json={'categoryID':categoryID,'content':val,'id':id};
+                        }else if(againAsk)
+                        {
+                            var json={'categoryID':categoryID,'content':val,'topicID':topicID};
+                        }else
+                        {
+                            var json={'categoryID':categoryID,'content':val};
+                        }
+                        if(againAsk)
+                        {
+                            var url=window.duLife.URLS.againAsk;
+                        }else{
+                            var url=window.duLife.URLS.askingQuestion;
+                        };
+                        $.jsonp({
+                            type:'post',
+                            url: url,
+                            callbackParameter: 'callback',
+                            data: json,
+                            beforeSend: function(){
+                            },
+                            success: function(data){
+                                if(data.success)
+                                {
+                                    $.duLife.fns.tips(data.message);
+                                    setTimeout(function()
+                                    {
+                                        if(newCreat)
+                                        {
+                                            window.location='../../view/asking/index.html';
+                                        }
+                                        else
+                                        {
+                                            location.replace('../../view/asking/askingAnswer.html?categoryID='+categoryID+'&categoryName='+categoryName+'&id='+topicID);
+                                        }
+
+                                    },1000);
+                                }
+                                else
+                                {
+                                    $.duLife.fns.tips(data.message);
+                                };
+                                $('#subBtn').removeClass('disable');
+                            }
+                        })
+                    }else
+                    {
+                           $.duLife.fns.tips('提问内容不能为空，请输入想要提问的内容。');
+                           $('#subBtn').removeClass('disable');
+                    };
+                },500)
+            });
+            $('#askQet').on('pagebeforeshow',function(){
+                var str =$.mobile.activePage.attr('data-url');
+                var strData = $.duLife.fns.getUrlParam({str:str});
+                var headerText = strData.categoryName || '';
+                var quCon = strData.title || '';
+                var locatonHref=window.location.href;
+                $.mobile.activePage.find('header').html('<a id="backTo" href="javascript:;" data-rel="back" class="ui-link"></a>'+headerText);
+                if(quCon)
+                {
+                    $('#textareaBox').val(quCon);
+                };
+            });
+        })(jQuery);
+    };
+    </script>
+</div>
+</body>
+</html>

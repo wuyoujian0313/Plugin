@@ -1,0 +1,9 @@
+@charset "utf-8";
+/* CSS Document */
+.mainBox{top:4.8rem;position:fixed;width:100%;}
+#associationContent{padding:0 0.8rem 0.8rem;}
+.associationTitle{font-size:1.8rem;line-height:3rem;text-align:center;border-bottom:0.1rem solid #ececec;font-weight:normal;}
+.content{padding:1rem 0.5rem;font-size:1.4rem;line-height:2rem;color:#333333;word-break: break-all;word-wrap: break-word;}
+.content p{color:#999999;}
+.content p b{color:#000000;width:5.5em;display:inline-block;}
+.content img{padding-top:1rem;}

@@ -1,0 +1,19 @@
+@charset "utf-8";
+/* CSS Document */
+#postBox{padding:1rem 0.8rem;}
+.information{line-height:2rem;font-size:1.6rem;padding:2.4rem 0.2rem 0;}
+.information span{color:#999999;float:right;font-size:1.4rem;}
+.changeStatus,.overStatus{background:#4088ff;height:2.4rem;color:#ffffff;width:80%;margin:1.5rem auto 0.5rem;text-shadow:none;padding:0.3rem;display:-webkit-box;line-height:2.4rem;}
+.changeStatus .left,.overStatus .left{background:#ffffff;color:#4088ff;font-size:4rem;width:8rem;text-align:center;display:inline-block;height:2.4rem;line-height:1.8rem;}
+.changeStatus .right,.overStatus .right{-webkit-box-flex:1;display: -webkit-box;-webkit-box-orient: vertical;width:100%;text-align:center;}
+.resultTips a{text-align:center;width:50%;display:inline-block;color:#000000;text-shadow:none;}
+/*已结束*/
+.overStatus{background:#999999;}
+.overStatus .left{color:#999999;}
+.pb5{padding-bottom:0.5rem;}
+.dis{display:none;}
+.resultTips .modify .modis{opacity:0.4;}
+
+.noPublish{
+	color:#999999;text-align:center;padding-top:50%;font-size:1.8rem;;
+}

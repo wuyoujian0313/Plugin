@@ -1,0 +1,123 @@
+#personalCenter .content{
+	width: 100%;
+	position: fixed;
+	top: 4.2rem;
+}
+.listBox {
+	padding: 2rem 1rem 0rem 1rem;
+}
+.listBox li {
+	border: 0.1rem solid #ececec;
+	height: 4.4rem;
+	line-height: 4.6rem;
+	font-size: 1.6rem;
+	padding: 0rem 1.5rem;
+	overflow:hidden;
+}
+.listBox .listPublish{
+	border-bottom:0;
+}
+#setting{margin-top:2rem;}
+/*#setting .divVersion{
+	
+}*/
+.listBold {
+	float: right;
+	color: #999999;
+	font-size: 2.4rem;
+}
+.numBox{
+	background: no-repeat center url(../../images/notice-red.png);
+	background-size: auto 45%;
+	font-size: 1.2rem;
+	width: 40px;
+	text-align: center;
+	position: absolute;
+	text-shadow:none;
+	color:#ffffff;
+}
+.backInfo{
+	background: no-repeat center url(../../images/personal/topbg.png);
+	/*background-size: auto 100%;*/
+	width: 100%;
+	height: 172px;
+	text-align: center;
+}
+.personalInfo{
+	color: #ffffff;
+	text-align: center;
+	text-shadow:none;
+	margin-top:0.3rem;
+	padding: 1rem 0;
+}
+.borderImg{
+	width: 104px;
+	height: 104px;
+	margin: 0 auto;
+	overflow: hidden;
+	border-radius: 100px;
+	padding:2px;
+	background:#ffffff;
+}
+.auxiliary{
+    width:104px;
+    height:104px;
+    overflow: hidden;
+	border-radius: 100px;
+}
+.headImg{
+	width: 104px;
+}
+.name{
+	padding-top: 0.5rem;
+	font-size:1.8rem; 
+}
+.department{
+	padding-top: 0.2rem;
+	font-size:1.3rem; 
+}
+#settingPage .listBox{padding: 8rem 1rem 0rem 1rem;}
+#feedback{margin-top:3rem;}
+.logoutBtn {
+	visibility:hidden;
+	background: #e9665a;
+	color: #ffffff;
+	border: 0px;
+	font-size: 1.6rem;
+	cursor: pointer;
+	outline: none;
+	text-shadow: none;
+	box-shadow: none;
+	font-weight:normal;
+	height:4.9rem;
+	position:fixed;
+	width:100%;
+	margin:0;
+}
+.logoutBtn .ui-btn-inner{line-height: 4.9rem;padding:0;font-size:1.6rem;}
+.logoutBtn:hover{color:#ffffff;}
+.divVersion{
+	background-color: red;
+	width: 10px;
+	height: 10px;
+	display: none;
+	border-radius: 5px;
+	margin-left: 10px;
+}
+
+#logoutConfirm{
+	text-align: center;
+	width:280px;
+	height:140px;
+}
+#logoutConfirm p{
+	font-size: 2rem;
+	color:#666666;
+	height:50px;
+	line-height:50px;
+}
+#logoutConfirm a{
+	width:9.5rem; margin:1rem 5px; display: inline-block;background:#48b0ed;border:0;border-radius:0.3rem;color:#ffffff;text-shadow:none;font-weight:normal;
+}
+#logoutConfirm .ui-btn-up-c{background:#a0afd5;margin-left:15px;}
+#settingPage .ui-simpledialog-container{border:0!important;}

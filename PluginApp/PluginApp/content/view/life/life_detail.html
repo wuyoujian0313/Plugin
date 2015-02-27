@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>度生活</title>
+    <meta name="description" content=""/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="viewport" content="width=device-width, maximum-scale=1.0, user-scalable=0, initial-scale=1.0"/>
+    <meta content="telephone=no" name="format-detection">
+    <link rel="stylesheet" href="../../lib/jqm/css/themes/default/jquery.mobile-1.3.2.min.css" type="text/css"/>    
+    <link rel="stylesheet" href="../../js/widgets/simpledialog/jquery.mobile.simpledialog.css" />
+    <link rel="stylesheet" href="../../js/widgets/refresh/refresh.css" type="text/css"/>
+    <link rel="stylesheet" href="../../css/common.css" type="text/css"/>
+    <script type="text/javascript" src="../../lib/jqm/js/jquery.js"></script>
+    <script>
+    $(document).bind("mobileinit", function(){
+         $.mobile.selectmenu.prototype.options.nativeMenu = false;
+    });
+    </script>
+    <script type="text/javascript" src="../../lib/jqm/js/jquery.mobile-1.3.2.min.js"></script>
+    <script type='text/javascript' src='../../lib/handlebars.js'></script>
+    <script type='text/javascript' src='../../lib/registerHelper.js'></script>
+    <script type="application/javascript" src="../../js/widgets/simpledialog/jquery.mobile.simpledialog.js"></script>
+    <script type="application/javascript" src="../../js/widgets/iscroll/iscroll.js"></script>
+    <script type='text/javascript' src='../../js/widgets/refresh/refresh.js'></script>
+    <script type="application/javascript" src="../../js/widgets/device.js"></script>
+    <script type="application/javascript" src="../../js/widgets/jquery.jsonp.js"></script>
+    <script type='text/javascript' src='../../js/config.js'></script>
+    <script type='text/javascript' src='../../js/common.js'></script>
+</head>
+<body id="body">
+<div data-role="page" id="lifeDetail">
+	<link rel="stylesheet" href="../../css/menu.css" type="text/css"/>
+    <link rel="stylesheet" href="../../css/life/life_detail.css" />
+    <div id="wrap">
+        <header><a id='backTo' href='javascript:;' data-rel='back'></a>生活站</header>
+        <div id="mainView">
+        	<!--tpl_article-->
+        </div>
+    </div>
+	<script id="tpl_article" type="text/x-handlebars-template">
+	{{#article}}
+	<div id="articleWrapper">
+		<div class="mainBox" id='mainBoxScroller' articleid="{{id}}">
+			<h2 class="title">{{title}}</h2>
+			{{#if (readoutValue type 'ACTIVITY')}}
+			<div class="aboutTitle clearfix"><span class="tal">{{dateFormat today pubDate 'YYYY-MM-DD' false}}&nbsp;</span><span class="tac"><b class="countDown"></b></span><span class="tar"><b>{{this.clickCount}}</b></span></div>
+			{{else}}
+			<div class="aboutTitle1 clearfix"><span class="tal">{{dateFormat today pubDate 'YYYY-MM-DD' false}}&nbsp;</span><span class="tar"><b>{{this.clickCount}}</b></span></div>
+			{{/if}}
+			<div class="content">
+				<div class="contentText" id="contentText">{{{content}}}</div>
+			</div>
+		</div>
+	</div>  
+	<menu id="menu">{{#if disableComment}}{{else}}<a articleid="{{id}}" class="lookComment"><span></span><em>评论{{#if commentCount}}{{#compare commentCount '>' 999}}(999+){{/compare}}{{#compare commentCount '<=' 999}}({{commentCount}}){{/compare}}{{else}}(0){{/if}}</em></a>{{/if}}{{#if disableComment}}{{else}}<a articleid="{{id}}" class="writeComment"><span></span><em>写评论</em></a>{{/if}}<a  class="{{#if isTop}}somePraise clickAfter {{else}} somePraise {{/if}}"><span></span><em>点赞{{#if topCount}}(<b>{{#compare topCount '>' 999}}999+{{/compare}}{{#compare topCount '<=' 999}}{{topCount}}{{/compare}}</b>){{else}}(<b>0</b>){{/if}}</em></a>{{#if (readoutValue status '进行中')}}<a href="javascript:;" class="{{#if isJoin}}participation clickAfter {{else}} participation {{/if}}"><span></span><em>参与{{#if joinCount}}(<b>{{#compare joinCount '>' 999}}999+{{/compare}}{{#compare joinCount '<=' 999}}{{joinCount}}{{/compare}}</b>){{else}}(<b>0</b>){{/if}}</em></a>{{/if}}</menu>
+	{{/article}} 
+    </script>
+    <script type="text/javascript" src='../../js/life/life_detail.js'></script>
+    <script type="text/javascript">
+        // var scripts = ['../../js/life/life_detail.js'];
+        // for(var i = 0; i < scripts.length; i++){
+        //     var script = document.createElement('script');
+        //     script.src = scripts[i];
+        //     document.body.appendChild(script);
+        // }
+    if(window.is40){
+        // JavaScript Document
+         ;(function($,window){
+            //validSession('../../login.html');
+//window.updateTokenFn();
+
+            window.$mainView = $('#lifeDetail #mainView');
+            window.tm=null;
+            var lifeDetailScroll;
+            window.loadDetailData = function(options){
+                var options = options || {};
+                var type = options.type || 'all';
+                var dataHandle = options.dataHandle || function(data){$mainView.html(data)};
+                var cb = options.cb || function(){};
+                var paramData = $.duLife.fns.getUrlParam();
+                var id = paramData.articleid;
+                var type= paramData.detailtype || '生活站';
+                if(type=='爱折扣')
+                {
+                    $.mobile.activePage.find('header').html('<a id="backTo" href="./../../view/privilege/index.html?zkIndex=1" data-ajax="false" class="ui-link"></a>'+type);
+                }
+                else
+                {
+                    $.mobile.activePage.find('header').html('<a id="backTo" href="javascript:;" data-rel="back" class="ui-link"></a>'+type);
+                }
+                $.jsonp({
+                    url: window.duLife.URLS.lifeDetail,
+                    callbackParameter: 'callback',
+                    timeout:5000,
+                    data: {
+                        id: id
+                    },
+                    beforeSend: function(xhr){
+                        // validSession('../../login.html',this);
+                    },
+                    success: function(data){
+                        var count=data.article.topCount;
+                        var idNum=data.article.id;
+                        var src_article = $('#tpl_article').html();
+                        var tpl_article = Handlebars.compile(src_article);
+                        var titleText=$('#lifeDetail header').text();
+                        dataHandle(tpl_article(data));
+                        $("#contentText").find('img').css({'max-width':'100%','height':'auto'});
+                        $("#contentText").find("input[type=image]").css({'max-width':'100%','height':'auto'});
+                        if(data.article.status=='进行中')
+                        {
+                            clearInterval(tm);
+                            tm=null;
+                            var s=parseInt((data.article.endDate-data.article.today)/1000);
+                            s= countDown(data.article.today,data.article.endDate,s);
+                            tm=setInterval(function(){s= countDown(data.article.today,data.article.endDate,s)},1000);
+                        }else if(data.article.status=='敬请期待')
+                        {
+                            var day=Math.ceil((data.article.startDate-data.article.today)/(1000*60*60*24));
+                            $('.countDown').html('距开始'+day+'天');
+                        }
+                        else
+                        {
+
+                            $('.countDown').html('已结束').css({'background':'none','color':'#999999'});
+                        };
+                        /*点赞*/
+                        $('menu .somePraise').on('click',function()
+                        {
+                            var $target=$(this);
+                            var url=window.duLife.URLS.support;
+                             if(!$target.hasClass('clickAfter'))
+                             {
+                                var json={
+                                    'id':idNum
+                                };
+                                $.jsonp({
+                                    type:'GET',
+                                    url: url,
+                                    callbackParameter: 'callback',
+                                    data: json,
+                                    timeout:5000,
+                                    beforeSend: function(){
+                                    },
+                                    success: function(data){
+                                        if(data.success)
+                                        {
+                                            $target.addClass('clickAfter');
+                                            if(data.topCount>999)
+                                            {
+                                                $target.find('b').text('999+');
+                                            }
+                                            else
+                                            {
+                                                $target.find('b').text(data.topCount);
+                                            }
+                                            $.duLife.fns.tips(data.message);
+                                        }else{
+                                            $.duLife.fns.tips(data.message);
+                                        }
+                                        
+                                    },
+                                })
+                             }else{
+                                $.duLife.fns.tips('赞过了');
+                             };     
+                        });
+                        /*参与*/  
+                        $('menu .participation').on('click',function()
+                        {
+                            var $target=$(this);
+                            var url=window.duLife.URLS.isJoin;
+                            if(!$target.hasClass('clickAfter'))
+                             {
+                                var json={
+                                    'id':idNum
+                                };
+                                $.jsonp({
+                                    type:'GET',
+                                    url: url,
+                                    callbackParameter: 'callback',
+                                    timeout:5000,
+                                    data: json,
+                                    beforeSend: function(){
+                                    },
+                                    success: function(data){
+                                        if(data.success)
+                                        {
+                                            $target.addClass('clickAfter');
+                                            if(data.joinCount>999)
+                                            {
+                                                $target.find('b').text('999+');
+                                            }
+                                            else
+                                            {
+                                                $target.find('b').text(data.joinCount);
+                                            }
+                                            $.duLife.fns.tips(data.message);
+                                        }else{
+                                            $.duLife.fns.tips(data.message);
+                                        }
+                                    },
+                                })
+                             }else
+                             {
+                                $.duLife.fns.tips('已参与');
+                             }; 
+                        });
+                        setTimeout(function(){
+                            var wrapper = $('#lifeDetail #mainView #articleWrapper');
+                            $('#lifeDetail #mainView #articleWrapper').css('height',Math.min(parseInt($(window).height()),parseInt(window.screen.height)) - window.statusHeight - parseInt($('header').height()) - parseInt($('#lifeDetail menu').height()));
+                            lifeDetailScroll = new iScroll(wrapper[0]);
+
+                            $('menu').css({'top':Math.min(parseInt($(window).height()),parseInt(window.screen.height)) - window.statusHeight - parseInt($('#lifeDetail menu').height()),'visibility':'visible'})
+                        },200)
+                        var i = 1;
+                        var freshInterval = setInterval(function(){
+                            if(i>=4){
+                                clearInterval(freshInterval);
+                            }
+                            lifeDetailScroll.refresh();
+                            i++;
+                        },500);
+                        $('menu').delegate('.writeComment','click',function(){
+                            var articleid = $(this).attr('articleid');
+                            if(window.is40){
+                                window.params = {'commentType':titleText,'articleid':articleid};
+                                $.mobile.changePage('../../view/life/life_comment.html',{transition :'none'});
+                            }else{
+                                $.mobile.changePage('../../view/life/life_comment.html?commentType='+titleText+'&articleid='+articleid,{transition :'none'});
+                            }
+                        });
+                        $('menu').delegate('.lookComment','click',function(){
+                            var articleid = $(this).attr('articleid');
+                            if(window.is40){
+                                window.params = {'comListType':titleText,'articleid':articleid};
+                                //$.mobile.changePage('../../view/life/comment_list.html',{transition :'none'});
+                                $.mobile.changePage('../../view/life/comment_list.html',{transition :'none'});
+                            }else{
+                                $.mobile.changePage('../../view/life/comment_list.html?comListType='+titleText+'&articleid='+articleid,{transition :'none'});
+                                //location.href = '../../view/life/comment_list.html?comListType='+titleText+'&articleid='+articleid;
+                            }
+                        });
+                        cb && cb();
+                    },
+                    error: function(args){
+                        $.duLife.fns.tips('亲，网络环境不稳定，请刷新重试');
+                        cb && cb();
+                        return false;
+                    },
+                    complete: function(xhr){
+            
+                    }
+                });
+            };
+            $('#lifeDetail').on('pagebeforeshow',function(){
+                loadDetailData();
+
+            })
+            $('#lifeDetail').on('pagebeforehide',function(){
+                clearInterval(tm);
+            });
+
+            /*倒计时*/
+            function double(n)
+            {
+                return n<10 && n>=0?'0'+n:''+n;
+            };
+            function countDown(today,endDate,s)
+            {
+               if(s<=0)
+                {
+                    clearInterval(tm);
+                    $('.countDown').html('已结束').css('background','none');
+                }else{
+                    s--;
+                    var sec=s;
+                    var d=parseInt(sec/86400);
+                    sec%=86400;
+                    var h=parseInt(sec/3600);
+                    sec%=3600;
+                    var m=parseInt(sec/60);
+                    sec%=60;
+                    $('.countDown').html(double(d)+'天'+double(h)+'时'+double(m)+'分'+double(sec)+'秒');    
+                }
+                return s;
+            };
+        })(jQuery,window);
+
+    }
+    </script>
+</div>
+</body>
+</html>

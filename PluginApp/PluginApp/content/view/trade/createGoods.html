@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>度生活</title>
+    <meta name="description" content=""/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="viewport" content="width=device-width, maximum-scale=1.0, user-scalable=0, initial-scale=1.0"/>
+    <meta content="telephone=no" name="format-detection">
+    <link rel="stylesheet" href="../../lib/jqm/css/themes/default/jquery.mobile-1.3.2.min.css" type="text/css"/>    
+    <link rel="stylesheet" href="../../js/widgets/simpledialog/jquery.mobile.simpledialog.css" />
+    <link rel="stylesheet" href="../../js/widgets/refresh/refresh.css" type="text/css"/>
+    <link rel="stylesheet" href="../../css/common.css" type="text/css"/>
+    <script type="text/javascript" src="../../lib/jqm/js/jquery.js"></script>
+    <script>
+    $(document).bind("mobileinit", function(){
+         $.mobile.selectmenu.prototype.options.nativeMenu = false;
+    });
+    </script>
+    <script type="text/javascript" src="../../lib/jqm/js/jquery.mobile-1.3.2.min.js"></script>
+    <script type='text/javascript' src='../../lib/handlebars.js'></script>
+    <script type='text/javascript' src='../../lib/registerHelper.js'></script>
+    <script type="application/javascript" src="../../js/widgets/device.js"></script>
+    <script type="application/javascript" src="../../js/widgets/simpledialog/jquery.mobile.simpledialog.js"></script>
+    <script type="application/javascript" src="../../js/widgets/iscroll/iscroll.js"></script>
+    <script type='text/javascript' src='../../js/widgets/refresh/refresh.js'></script>
+	<script type="application/javascript" src="../../js/widgets/jquery.jsonp.js"></script>
+    <script type='text/javascript' src='../../js/config.js'></script>
+    <script type='text/javascript' src='../../js/common.js'></script>
+</head>
+<body id="body">
+<div data-role='page' id='createGoodsPage'>
+	<link rel="stylesheet" href="../../css/trade/creategoods.css" />
+	<link rel="stylesheet" href="../../js/widgets/imageFlip/jquery.imageflip.css" />
+	<script type="application/javascript" src="../../js/widgets/imageFlip/jquery.imageflip.js"></script>
+	<header><a id='backTo' href='javascript:;' data-rel='back'></a>跳蚤街</header>
+	<div id='wrapper'>
+		<form action="" method='post' id='createGoods'>
+			<div id="photosWrapper">
+				<div id="photoScroller" class='noPhoto'>
+					<a href='life://api/pickmedia?x=640&y=480' id="addPhoto"></a>
+					<span id='addPhotoSpan' style='display:none;'></span>
+					<ul id="photoList">
+						
+					</ul>
+				</div>				
+			</div>
+			<div class="legend">
+				<fieldset data-role="controlgroup" data-type="horizontal">
+					<legend>我想</legend>
+			     	<input type="radio" name="type" id="radio-choice-1" value="转让" checked="checked" />
+			     	<label for="radio-choice-1">转让</label>
+
+			     	<input type="radio" name="type" id="radio-choice-2" value="求购"  />
+			     	<label for="radio-choice-2">求购</label>
+				</fieldset>
+			</div>
+			<div class="legend">
+				<fieldset data-role="controlgroup" data-type="horizontal">
+					<legend>形式</legend>
+			     	<input type="radio" name="method" id="radio-choice-3" value="个人" checked="checked" />
+			     	<label for="radio-choice-3">个人</label>
+
+			     	<input type="radio" name="method" id="radio-choice-4" value="代转"  />
+			     	<label for="radio-choice-4">代转</label>
+				</fieldset>
+			</div>
+			<div data-role="fieldcontain" class='legend'>
+			　 <label for='prov' class='select'>位置</label>
+			   <label for='city' style='display:none'>位置</label>
+			　 <div id="cityWrapper"> 
+			    <select name='prov' class="prov" id='prov'></select>  
+			    <select name='city' class="city" id='city'></select> 
+			   </div> 
+			</div>
+			<div data-role="fieldcontain" class='legend' id='typeSelectWrapper'>
+			　 <label for='typeSelect' class='select'>类型</label><select name='goodsType' id='typeSelect'>
+			  	
+			  </select>  
+			</div>
+			<div class="legend" id='priceWrapper'>
+				<label for="price">价格</label><input type="text" name="price" id="price" value='' maxlength="10" placeholder='正整数' required/>元
+			</div>
+			<div class="legend" id='phoneWrapper'>
+				<label for="phone">电话</label><input type="text" name="phone" id="phone" value='' placeholder='13888888888' maxlength="12" required/>
+			</div>
+			<div class="legend" id='createTitleWrapper'>
+				<input type="text" name="title" id="title" value='' placeholder='标题：点击按钮自动生成' required/>
+				<span id='createTitle'>生成标题</span>
+			</div>
+			<div class="legend legend-padding">
+				<textarea name="content" id="content" placeholder='说点什么(选填)...'></textarea>
+				<span class='tips'><em>400</em>字</span>
+			</div>
+			<div class="legend legend-padding">
+				<span id='save'>暂存</span>
+				<span id='submit'>提交</span>
+			</div>
+		</form>
+	</div>	
+	<script id="tpl_goodsType" type="text/x-handlebars-template">
+	  	{{#each goodsType}}
+	  	<option value='{{this.value}}' {{#if this.selected}}selected{{/if}}>{{this.name}}</option>
+	  	{{/each}}
+  	</script>
+	<script id="tpl_editGoodsForm" type="text/x-handlebars-template">
+	<input type='hidden' name='id' value="{{id}}"/>
+	<input type='hidden' name='articleId' value='{{articleId}}'/>
+	<div id="photosWrapper">
+		<div id="photoScroller" class='noPhoto'>
+			{{#compare pics.length '<' 8}}
+			<a href='life://api/pickmedia?x=640&y=480' id="addPhoto"></a>
+			<span id='addPhotoSpan' style='display:none;'></span>
+			{{else}}
+			<a href='life://api/pickmedia?x=640&y=480' id="addPhoto" style='display:none;'></a>
+			<span id='addPhotoSpan'></span>
+			{{/compare}}
+			<ul id="photoList">
+			{{#each pics}}
+			<li><a data-href="{{this}}" class="ui-link"><img src="{{this}}"></a><span class="delete"></span><input type="hidden" name="pics" value="{{this}}"></li>
+			{{/each}}
+			</ul>
+		</div>				
+	</div>
+	<div class="legend">
+		<fieldset data-role="controlgroup" data-type="horizontal">
+			<legend>我想</legend>
+	     	<input type="radio" name="type" id="radio-choice-1" value="转让" {{#compare type '==' '转让'}}checked="checked" {{/compare}}/>
+	     	<label for="radio-choice-1">转让</label>
+
+	     	<input type="radio" name="type" id="radio-choice-2" value="求购" {{#compare type '==' '求购'}}checked="checked" {{/compare}}  />
+	     	<label for="radio-choice-2">求购</label>
+		</fieldset>
+	</div>
+	<div class="legend">
+		<fieldset data-role="controlgroup" data-type="horizontal">
+			<legend>形式</legend>
+	     	<input type="radio" name="method" id="radio-choice-3" value="个人" {{#compare method '==' '个人'}}checked="checked" {{/compare}}/>
+	     	<label for="radio-choice-3">个人</label>
+
+	     	<input type="radio" name="method" id="radio-choice-4" value="代转" {{#compare method '==' '代转'}}checked="checked" {{/compare}}  />
+	     	<label for="radio-choice-4">代转</label>
+		</fieldset>
+	</div>
+	<div data-role="fieldcontain" class='legend'>
+	　 <label for='prov' class='select'>位置</label>
+	   <label for='city' style='display:none'>位置</label>
+	　 <div id="cityWrapper"> 
+	    <select name='prov' class="prov" id='prov'></select>  
+	    <select name='city' class="city" id='city'></select> 
+	   </div> 
+	</div>
+	<div data-role="fieldcontain" class='legend' id='typeSelectWrapper'>
+	　 <label for='typeSelect' class='select'>类型</label>
+	  <select name='goodsType' id='typeSelect'>
+	  	{{# each goodsType}}
+	  	<option value='{{this.name}}' {{#if this.selected}}selected{{/if}}>{{this.name}}</option>
+	  	{{/each}}
+	  </select>  
+	</div>
+	<div class="legend" id='priceWrapper'>
+		<label for="price">价格</label><input type="text" name="price" id="price" value='{{price}}' maxlength="10" required/>元
+	</div>
+	<div class="legend" id='phoneWrapper'>
+		<label for="phone">电话</label><input type="text" name="phone" id="phone" value='{{phone}}' maxlength="12" required/>
+	</div>
+	<div class="legend" id='createTitleWrapper'>
+		<input type="text" name="title" id="title" value='{{title}}' placeholder='标题：点击按钮自动生成' required/>
+		<span id='createTitle'>生成标题</span>
+	</div>
+	<div class="legend legend-padding">
+		<textarea name="content" id="content" placeholder='说点什么(选填)...'>{{content}}</textarea>
+		<span class='tips'><em>400</em>字</span>
+	</div>
+	<div class="legend legend-padding">
+		<span id='save'>暂存</span>
+		<span id='submit'>提交</span>
+	</div>
+	</script>
+	<script type='text/javascript' src='../../js/widgets/cityselect/jquery.cityselect.js'></script>
+	<script type='text/javascript' src='../../js/trade/creategoods.js'></script>
+	
+</div>
+
+
+</body>
+</html>
